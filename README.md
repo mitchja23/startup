@@ -43,3 +43,14 @@ Websocket: Used to broadcast when you complete a task to your friends that the t
 
 React: Application will be ported to the React Framework
 
+# HTML Deliverable 
+For this deliverable I built out the structure of my application using HTML.
+
+HTML pages - 4 pages of HTML. Index is the login and the rest are all info screens 
+Links - login page automatically brings to the home page. From there you can navigate from prize, games, and home page
+Text - Most of the text on the final product will just be the tasks people make.
+Images - The images are used as place holders for what the little prizes and trophies will look like
+DB/Login - The login info will be saved aswell as the coins. Place holders have been made to show.
+WebSocket - The websocket will be the friend actvity that is displayed when tasks are complete
+
+ Note - The games page itself has not been layouted since many of the games are going to be in java scipt so as of now they are just labeled game 1 2 and 3
