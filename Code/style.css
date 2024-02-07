@@ -17,3 +17,14 @@
     justify-content: center;
     align-items: center;
 }
+
+
+#container {
+    display: flex;
+    background-color: #ffffff; 
+    border: medium solid black;
+    width: 50%; 
+    padding: 20px; 
+    box-sizing: border-box;
+}
+
