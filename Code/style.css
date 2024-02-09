@@ -24,6 +24,7 @@ body{
     display: flex;
     justify-content: right;
     align-items: right;
+    flex-wrap:wrap;
 }
 
 
@@ -31,7 +32,7 @@ body{
     display: flex;
     background: var(--background);
     border: 3.5px solid var(--color);
-    width: 25%; 
+    width: 20%; 
     padding: 1px; 
     box-sizing: border-box;
     border-radius: 10px;
@@ -39,12 +40,13 @@ body{
     float: right;
     box-shadow: 0 0 36px 1px rgba(0, 0, 0, 0.5);
     border-radius: 30px;
+
 }
 #Leftcontainer{
     display: flex;
     background: var(--background);
     border: 3.5px solid var(--color);
-    width: 25%; 
+    width: 20%; 
     padding: 1px; 
     box-sizing: border-box;
     height: 85%;
@@ -56,13 +58,14 @@ body{
     display: flex;
     background: var(--background);
     border: 3.5px solid var(--color);
-    width: 50%; 
+    width: 40%; 
     padding: 1px; 
     box-sizing: border-box;
     border-radius: 30px;
     height: 95%;
     float: center;
     box-shadow: 0 0 36px 1px rgba(0, 0, 0, 0.5);
+    
 
 }
 .menu {
@@ -100,6 +103,7 @@ body{
 }
 
 footer{
-  background:var(--container);
+  background: #82a887;
   text-align: center;
 }
+
