@@ -5,11 +5,13 @@
 #LeftSidedItems {
     float: left;
     text-align: left; 
+    justify-content: left;
 }
 
 #RightSidedItems {
     float: right;
     text-align: right;
+    justify-content: right;
 }
 
 #CenterAligned {
