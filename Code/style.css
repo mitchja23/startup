@@ -10,8 +10,12 @@
 }
 
 body {
-    background: var(--background);
     margin: 0;
+    box-sizing: border-box;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+    background: var(--background);
+    color: var(--color);
+    letter-spacing: 1px;
 }
 
 #CenterAligned {
@@ -69,8 +73,23 @@ body {
 }
 
 #Leftcontainer button,
-#Leftcontainer input[type="checkbox"] {
+#Leftcontainer input[type="checkbox"],
+button,
+input[type="checkbox"],
+input[type="submit"] {
     margin-bottom: 10px; 
+    background-color: var(--primary-color);
+    color: var(--color);
+    display: block;
+    padding: 10px;
+    border-radius: 10px;
+    outline: none;
+    font-size: 18px;
+    letter-spacing: 1.5px;
+    font-weight: bold;
+    width: 100%;
+    justify-content: center;
+    border-color: var(--color);
 }
 
 .menu {
@@ -101,10 +120,4 @@ body {
 
 .dropdown:hover .dropdown-content {
     display: block;
-}
-
-footer {
-    background: #82a887;
-    text-align: center;
-    margin-top: 100%;
 }
