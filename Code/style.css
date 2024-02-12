@@ -21,9 +21,9 @@ body {
 }
 
 #RightAligned {
-    display: flex;
-    justify-content: flex-end; /* Align items to the right */
-    align-items: center; /* Keep items centered vertically */
+    display: grid;
+    justify-content: flex-end; 
+    align-items: center; 
     flex-wrap: wrap;
 }
 
