@@ -231,6 +231,8 @@
     color:var(--primary-color);
     position: relative;
     border-radius: 35px;
+    margin-top: 20px;
+    margin-bottom: 20px;
   }
   
   .sb4:before {
