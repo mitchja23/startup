@@ -54,3 +54,19 @@ For this deliverable I built out the structure of my application using HTML.
 * WebSocket - The websocket will be the friend actvity that is displayed when tasks are complete
 
 * Note - The games page itself has not been layouted since many of the games are going to be in java scipt so as of now they are just labeled game 1 2 and 3
+
+
+
+# CSS Deliverable 
+
+* Header footer and main contant has be colored and formated to fit and look nice
+
+* Navigation elements have been moved under profile picture and became buttons
+
+* The Window itself is responise and looks goot on all devices 
+
+* All the requirmeent html elements have been formatd such has database and websocket areas
+
+* All the text itself has been colored to fit the color scheme
+
+* Boarders were made for all the prize images and profile  picture was centered and rounded
