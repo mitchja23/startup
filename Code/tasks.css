@@ -226,17 +226,17 @@ input[type="checkbox"],
 button,
 input[type="checkbox"],
 input[type="submit"] {
-      margin-bottom: 10px; 
-      background-color: var(--primary-color);
-      color: var(--color);
-      display: block;
-      padding: 10px;
-      border-radius: 10px;
-      outline: none;
-      font-size: 18px;
-      letter-spacing: 1.5px;
-      font-weight: bold;
-      width: 100%;
-      justify-content: center;
-      border-color: var(--color);
-  }
+    margin-bottom: 10px; 
+    background-color: var(--primary-color);
+    color: var(--color);
+    display: block;
+    padding: 10px;
+    border-radius: 10px;
+    outline: none;
+    font-size: 18px;
+    letter-spacing: 1.5px;
+    font-weight: bold;
+    width: 100%;
+    justify-content: center;
+    border-color: var(--color);
+}
