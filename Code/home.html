@@ -1,94 +1,125 @@
+
 <!DOCTYPE html>
-<html land ='en'>
-    <head>
-        <meta charset="utf-8">
-        <title>Home Page</title>
-        <link rel="stylesheet" href="style.css">
-    </head>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
 
+    <title>Persons Profile</title>
+ 
 
-    <nav>
-        <ul class="menu">
-
-            <li class="dropdown">
-                <a href="#">Navigation</a>
-                <ul class="dropdown-content">
-                    <li><a href="home.html">Home</a></li>
-                    <li><a href="prize.html"> Prizes</a></li>
-                    <li><a href="games.html"> Games</a></li>
-                </ul>
-            </li>
-
-        </ul>
-    </nav>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     
 
 
-    <body>
-        <header>
-            <h1 id="CenterAligned">Trophies and Prizes</h1>
-            <h2 id="LeftSidedItems">"Days Date"</h1>
-            <h6 id="LeftSidedItems"><a href="http://api.adviceslip.com/">API for daily advice under the date</a></h6>
-            <h3 id="RightAligned" >Friends actibity</h2>
-            <hr>
-        </header>
+    <div class="header__wrapper">
+      <header></header>
+      <div class="cols__container">
+        <div class="left__col">
+          <div class="img__container">
+            <img src="th.jpg" alt="User Image" />
+            <span></span>
+          </div>
 
-<div id="Leftcontainer">
-    <div class="container-wrapper">
-        <button>New Task</button>
-        <input type="checkbox" id="testCheckbox" value="Test">
-        <input type="checkbox" id="testCheckbox">
 
-        <button>Complete Task</button>
-    </div>
-</div>
+          <div id="aboutWrapper">
+            <ul class="about">
+              <li><span>0</span>Goals Completed</li>
+              <li><span>0</span>Trophies Earned</li>
+              <li><span>0</span>Friends</li>
+            </ul>
+          </div>
 
-        <div id="Rightcontainer">
+          <div class="content">
+
+          </div>
+
+          <div id="Rightcontainer">
             <div class="container-wrapper">
-                <p id="RightSidedItems">This will be websocket with friend activity and placed under the friend activity headingThis will be websocket with friend activity and placed under the friend activity headingThis will be websocket with friend activity and placed under the friend activity headingThis will be websocket with friend activity and placed under the friend activity headingThis will be websocket with friend activity and placed under the friend activity headingThis will be websocket with friend activity and placed under the friend activity headingThis will be websocket with friend activity and placed under the friend activity headingThis will be websocket with friend activity and placed under the friend activity headingThis will be websocket with friend activity and placed under the friend activity headingThis will be websocket with friend activity and placed under the friend activity heading</p>
+                
             </div>
         </div>
-
-        <div id="Centercontainer">
-            <table>
-                <tr>
-                    <td>
-                        <h1>Prizes</h1>
-                        <img src="pictures/Cash.png">
-                        <img src="pictures/Cash2.png">
-                        <img src="pictures/CatchingNet.png">
-                        <img src="pictures/CatHead.png">
-                        <img src="pictures/CD.png">
-                        <img src="pictures/ChestTreasure.png">
-                        <img src="pictures/Chili.png">
-                        <img src="pictures/Coin.png">
-                        <img src="pictures/Coin2.png">
-                        <img src="pictures/Gamepad.png">
-                        <img src="pictures/Gamepad2.png">
-                        <img src="pictures/Key.png">
-                        <img src="pictures/Luggage.png">
-                        <img src="pictures/Necklace.png">
-                        <img src="pictures/Trophy.png">
-                    </td>
-                </tr>
-                <tr></tr>
-                <tr></tr>
-            </table>
         </div>
-       
-        <footer>
-            <hr />
-            <span class="text-reset">Jacob Mitchell</span>
-            <br />
-            <a href="https://github.com/mitchja23/startup">GitHub</a>
-          </footer>
-    </body>
-        
+        <div id="center">
+          <nav id="navWrapper">
+            <ul >
+              <li id="listItem"><a href="home.html">Profile</a></li>
+              <li id="listItem"><a href="">Friend Activity</a></li>
+              <li id="listItem"><a href="prize.html">Prizes</a></li>
+              <li id="listItem"><a href="tasks.html">Tasks</a></li>
+            </ul>
+          </nav>
+        </div>
+        <div class="right__col">
+          
 
+          <div class="container">
+            <div class="prize-container">
+                <table>
+                    <tr>
+                        <td class="prize-item">
+                            <img src="pictures/Cash.png" width="100" height="100">
+                        </td>
+                        <td class="prize-item">
+                            <img src="pictures/Cash2.png" width="100" height="100">
+                        </td>
+                        <td class="prize-item">
+                            <img src="pictures/CatchingNet.png" width="100" height="100">
+                        </td>
+                        <td class="prize-item">
+                            <img src="pictures/CatHead.png" width="100" height="100">
 
-
-
-
-
-
+                        </td>
+                        <td class="prize-item">
+                            <img src="pictures/CD.png" width="100" height="100">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="prize-item">
+                            <img src="pictures/ChestTreasure.png" width="100" height="100">
+                        </td>
+                        <td class="prize-item">
+                            <img src="pictures/Chili.png" width="100" height="100">
+                        </td>
+                        <td class="prize-item">
+                            <img src="pictures/Coin.png" width="100" height="100">
+                        </td>
+                        <td class="prize-item">
+                            <img src="pictures/Coin2.png" width="100" height="100">
+                        </td>
+                        <td class="prize-item">
+                            <img src="pictures/Gamepad.png" width="100" height="100">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="prize-item">
+                            <img src="pictures/Gamepad2.png" width="100" height="100">
+                        </td>
+                        <td class="prize-item">
+                            <img src="pictures/Key.png" width="100" height="100">
+                        </td>
+                        <td class="prize-item">
+                            <img src="pictures/Luggage.png" width="100" height="100">
+                        </td>
+                        <td class="prize-item">
+                            <img src="pictures/Necklace.png" width="100" height="100">
+                        </td>
+                        <td class="prize-item">
+                            <img src="pictures/Trophy.png" width="100" height="100">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <hr />
+      <span class="text-reset">Jacob Mitchell</span>
+      <br />
+      <a href="https://github.com/mitchja23/startup">GitHub</a>
+  </footer>
+  </body>
+    
 </html>
