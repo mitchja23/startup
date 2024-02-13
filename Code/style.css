@@ -4,9 +4,15 @@
   --primary-color: #B5C2B2;
   --container: #DDD5D5;
 }
+@font-face {
+  font-family: "HeyComic";
+  src: url("HeyComic.otf") format("opentype");
+}
+
+
 
 * {
-  font-family: "Comic Sans MS", "Comic Sans", cursive;
+  font-family: "HeyComic";
   color: var(--color)
 }
 
