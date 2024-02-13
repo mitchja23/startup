@@ -218,28 +218,28 @@
 
 #center{
   margin-left: -90px;
-  text-align: center;
 }
   
 
-
-input[type="checkbox"],
-button,
-input[type="checkbox"],
-input[type="submit"] {
-    margin-bottom: 10px; 
-    background-color: var(--primary-color);
-    color: var(--color);
-    display: block;
-    padding: 10px;
-    border-radius: 10px;
-    outline: none;
-    font-size: 18px;
-    letter-spacing: 1.5px;
-    font-weight: bold;
-    width: 100%;
-    justify-content: center;
-    border-color: var(--color);
-}
-
-
+.box {
+    width: 400px;
+    margin: 0px auto;
+    background: var(--color);
+    padding: 30px;
+    text-align: center;
+    font-weight: 900;
+    color:var(--primary-color);
+    position: relative;
+    border-radius: 35px;
+  }
+  
+  .sb4:before {
+    content: "";
+    position: absolute;
+    border-left: 10px solid transparent;
+    border-right: 10px solid var(--color);
+    border-top: 10px solid var(--color);
+    border-bottom: 10px solid transparent;
+    right: 19px;
+    bottom: -15px;
+  }
