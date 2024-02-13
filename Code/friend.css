@@ -205,6 +205,7 @@
   
   footer{
     background-color: var(--primary-color);
+    margin-top:auto;
   }
 
   li {
@@ -235,7 +236,7 @@
     margin-bottom: 20px;
   }
   
-  .sb4:before {
+  .corner:before {
     content: "";
     position: absolute;
     border-left: 10px solid transparent;
