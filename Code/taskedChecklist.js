@@ -26,7 +26,18 @@ document.getElementById("newTaskBtn").addEventListener("click", function() {
     input.addEventListener("keydown", function(event) {
         if (event.key === "Enter") {
             label.textContent = input.value;
+            try {
+                taskItem.removeChild(input);
+            } catch (error) {
+            }
+        }
+    });
+
+    input.addEventListener("blur", function() {
+        label.textContent = input.value;
+        try {
             taskItem.removeChild(input);
+        } catch (error) {
         }
     });
 });
