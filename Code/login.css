@@ -8,11 +8,22 @@
     box-sizing: border-box;
 }
 
+@font-face {
+    font-family: "HeyComic";
+    src: url("HeyComic.otf") format("opentype");
+  }
+  
+  
+  * {
+    font-family: "HeyComic";
+    color: var(--color);
+  }
+  
+
 
 body {
     margin: 0;
     box-sizing: border-box;
-    font-family: "Comic Sans MS", "Comic Sans", cursive;
     background: var(--background);
     color: var(--color);
     letter-spacing: 1px;
