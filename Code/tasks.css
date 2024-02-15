@@ -19,8 +19,9 @@ input[type="submit"] {
 
 .task-item {
     display: flex;
-    align-items: center;
+    align-items: start;
     white-space: nowrap; 
+    text-align: left;
 }
 
 
