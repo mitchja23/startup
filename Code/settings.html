@@ -1,29 +1,26 @@
+<!-- settings.html -->
 <!DOCTYPE html>
-<html land ='en'>
-    <head>
-        <meta charset="utf-8">
-        <title>Login</title>
-        <link rel="stylesheet" href="login.css">
-    </head>
-
-    <body>
-        <section class="container">
-            <div class="login-container">
-                <div class="form-container">
-                    <h1>Settings</h1>
-                    <form>
-                        <input type="text" placeholder="Username" />
-                        <input type="password" placeholder="password" />
-                        <h3>Profile Picture</h3>
-                        <input type="file" placeholder="Profile Picture" text="Profile Picture"/>
-                        
-                        <button class="opacity">
-                            <a href="home.html">Save Changes</a>
-                        </button>
-
-                    </form>
-                </div>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <section class="container">
+        <div class="login-container">
+            <div class="form-container">
+                <h1>Settings</h1>
+                <form id="settingsForm">
+                    <input type="text" placeholder="Username" />
+                    <input type="password" placeholder="password" />
+                    <h3>Profile Picture</h3>
+                    <input type="file" id="profilePictureInput" placeholder="Profile Picture" />
+                    <button class="opacity" type="submit">Save Changes</button>
+                </form>
             </div>
-        </section>
-    </body>
+        </div>
+    </section>
+    <script src="settings.js"></script>
+</body>
 </html>
