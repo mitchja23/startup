@@ -17,3 +17,10 @@ input[type="submit"] {
     border-color: var(--color);
 }
 
+.task-item {
+    display: flex;
+    align-items: center;
+    white-space: nowrap; 
+}
+
+
