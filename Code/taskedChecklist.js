@@ -31,6 +31,28 @@ function addNewTask() {
     rating.addEventListener("change", function() {
         createLabelIfReady(taskItem);
     });
+
+    checkbox.addEventListener("change", function() {
+        if (checkbox.checked) {
+            openFileExplorer(taskItem);
+        }
+    });
+}
+
+function openFileExplorer(taskItem) {
+    let fileInput = document.createElement("input");
+    fileInput.type = "file";
+    fileInput.accept = "image/*";
+
+    fileInput.addEventListener("change", function() {
+        handleFileSelect(taskItem, fileInput.files[0]);
+    });
+
+    fileInput.click();
+}
+
+function handleFileSelect(taskItem, file) {
+    console.log("Selected file:", file);
 }
 
 function createLabelIfReady(taskItem) {
@@ -48,7 +70,7 @@ function createLabelIfReady(taskItem) {
         taskItem.removeChild(input);
         taskItem.removeChild(rating);
 
-        saveTasksToLocalStorage(); 
+        saveTasksToLocalStorage();
     }
 }
 
@@ -91,7 +113,7 @@ function saveTasksToLocalStorage() {
         });
     });
 
-    console.log(tasks); 
+    console.log(tasks);
 
     localStorage.setItem("tasks", JSON.stringify(tasks));
 }
