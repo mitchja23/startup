@@ -4,6 +4,14 @@ document.addEventListener('DOMContentLoaded', function() {
     if (profilePicture) {
         document.getElementById('profilePicture').src = profilePicture;
     }
+
+    let totalCoins = JSON.parse(localStorage.getItem('coins')) || 0;
+
+    if (totalCoins){
+        document.getElementById('coins').textContent = totalCoins;
+    }
+
+
     const tasks = JSON.parse(localStorage.getItem('tasks')); 
 
     console.log(tasks); 

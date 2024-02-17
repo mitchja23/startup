@@ -125,16 +125,80 @@ document.getElementById("clearTasksBtn").addEventListener("click", function() {
 
 
 function handleSubmit(event) {
-    event.preventDefault(); 
-    
+    event.preventDefault();
+
     const checkedTasks = Array.from(document.querySelectorAll('input[name="task"]:checked'))
                                .map(checkbox => checkbox.parentElement.textContent.trim());
-    
+
     let storedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
-    
+
     storedTasks = storedTasks.filter(task => !checkedTasks.includes(task.content));
-    
+
     localStorage.setItem('tasks', JSON.stringify(storedTasks));
-    
+
+   
+    saveCoinsToStorage();
+
+    updateTotalCoins();
+
+    checkedTasks.forEach(taskText => {
+        const taskItems = document.querySelectorAll('.task-item');
+        taskItems.forEach(taskItem => {
+            if (taskItem.querySelector('label').textContent.trim() === taskText) {
+                taskItem.remove();
+            }
+        });
+    });
 }
+
+
+
+function saveCoinsToStorage() {
+    let coins = 0;
+
+    let taskItems = document.querySelectorAll(".task-item");
+
+    taskItems.forEach(function(taskItem) {
+   
+        let ratingElement = taskItem.querySelector("select");
+        
+
+        if (ratingElement) {
+
+            let rating = ratingElement.value;
+
+
+            let coinsToAdd = 0;
+            switch (rating) {
+                case "Easy":
+                    coinsToAdd = 1;
+                    break;
+                case "Medium":
+                    coinsToAdd = 3;
+                    break;
+                case "Hard":
+                    coinsToAdd = 5;
+                    break;
+                default:
+                    break;
+            }
+
+       
+            coins += coinsToAdd;
+        }
+    });
+    localStorage.setItem("coins", coins);
+    console.log("Total coins:", coins);
+}
+
+
+function updateTotalCoins() {
+
+    let totalCoins = JSON.parse(localStorage.getItem('coins')) || 0;
+
+
+    document.getElementById('coins').textContent = totalCoins;
+}
+
+
 document.getElementById('taskForm').addEventListener('submit', handleSubmit);
