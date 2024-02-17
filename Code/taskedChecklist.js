@@ -122,3 +122,19 @@ document.getElementById("clearTasksBtn").addEventListener("click", function() {
     localStorage.removeItem("tasks");
     document.getElementById("taskList").innerHTML = "";
 });
+
+
+function handleSubmit(event) {
+    event.preventDefault(); 
+    
+    const checkedTasks = Array.from(document.querySelectorAll('input[name="task"]:checked'))
+                               .map(checkbox => checkbox.parentElement.textContent.trim());
+    
+    let storedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    
+    storedTasks = storedTasks.filter(task => !checkedTasks.includes(task.content));
+    
+    localStorage.setItem('tasks', JSON.stringify(storedTasks));
+    
+}
+document.getElementById('taskForm').addEventListener('submit', handleSubmit);
