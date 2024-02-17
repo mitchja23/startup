@@ -221,7 +221,8 @@ footer {
   height: 60px; 
   padding: 1px 0;
   
-}li {
+}
+li {
   padding: 20px;
   background-color: #9191911f; 
   border: 5px solid var(--color); 
