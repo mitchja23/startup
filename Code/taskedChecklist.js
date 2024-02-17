@@ -160,7 +160,7 @@ function saveCoinsToStorage() {
 
     taskItems.forEach(function(taskItem) {
    
-        let ratingElement = taskItem.querySelector("select");
+        let ratingElement = taskItem.querySelector("option");
         
 
         if (ratingElement) {
@@ -168,23 +168,21 @@ function saveCoinsToStorage() {
             let rating = ratingElement.value;
 
 
-            let coinsToAdd = 0;
             switch (rating) {
                 case "Easy":
-                    coinsToAdd = 1;
+                    coins += 1;
                     break;
                 case "Medium":
-                    coinsToAdd = 3;
+                    coins += 3;
                     break;
                 case "Hard":
-                    coinsToAdd = 5;
+                    coins += 5;
                     break;
                 default:
                     break;
             }
 
        
-            coins += coinsToAdd;
         }
     });
     localStorage.setItem("coins", coins);
@@ -194,10 +192,10 @@ function saveCoinsToStorage() {
 
 function updateTotalCoins() {
 
-    let totalCoins = JSON.parse(localStorage.getItem('coins')) || 0;
+    let coins = JSON.parse(localStorage.getItem('coins'));
 
 
-    document.getElementById('coins').textContent = totalCoins;
+    document.getElementById('coins').textContent = coins;
 }
 
 

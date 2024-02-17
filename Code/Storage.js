@@ -5,10 +5,10 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('profilePicture').src = profilePicture;
     }
 
-    let totalCoins = JSON.parse(localStorage.getItem('coins')) || 0;
+    let coins = JSON.parse(localStorage.getItem('coins')) || 0;
 
-    if (totalCoins){
-        document.getElementById('coins').textContent = totalCoins;
+    if (coins){
+        document.getElementById('coins').textContent = coins;
     }
 
 

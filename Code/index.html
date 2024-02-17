@@ -1,58 +1,27 @@
 <!DOCTYPE html>
 <html land ='en'>
-    <head>
-        <meta charset="utf-8">
-        
-        <title>Login</title>
-        <link rel="stylesheet" href="login.css">
-    </head>
+<head>
+    <meta charset="utf-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="login.css">
+</head>
 
-    <body>
-        <section class="container">
-            <div class="login-container">
-                <div class="form-container">
-                    <h1>Login</h1>
-                    <form>
-                        <input type="text" placeholder="USERNAME" />
-                        <input type="password" placeholder="PASSWORD" />
-                        <button class="opacity">
-                            <a href="home.html">Login</a>
-                        </button>
+<body>
+    <section class="container">
+        <div class="login-container">
+            <div class="form-container">
+                <h1>Login</h1>
+                <form action="home.html" method="post"> 
+                    <input type="text" name="username" placeholder="USERNAME" required/>
+                    <input type="password" name="password" placeholder="PASSWORD" required/>
+                    <input type="submit" id="submit" value="Login">
 
-                    </form>
-                    <div class="register-forget opacity">
-                        <a href="Register.html">REGISTER</a>
-                    </div>
+                </form>
+                <div class="register-forget opacity">
+                    <a href="Register.html">REGISTER</a>
                 </div>
             </div>
-        </section>
-    </body>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        </div>
+    </section>
+</body>
 </html>
