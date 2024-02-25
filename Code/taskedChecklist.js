@@ -1,3 +1,17 @@
+// Initialize task count from local storage or default to 0
+let taskCount = parseInt(localStorage.getItem('taskCount')) || 0;
+
+// Function to increment task count and update local storage
+function incrementTaskCount() {
+    taskCount++;
+    saveTaskCountToLocalStorage();
+}
+
+// Function to save task count to local storage
+function saveTaskCountToLocalStorage() {
+    localStorage.setItem('taskCount', taskCount);
+}
+
 document.getElementById("newTaskBtn").addEventListener("click", addNewTask);
 
 function addNewTask() {
@@ -35,6 +49,7 @@ function addNewTask() {
     checkbox.addEventListener("change", function() {
         if (checkbox.checked) {
             openFileExplorer(taskItem);
+            incrementTaskCount(); // Increment task count when task is completed
         }
     });
 }
@@ -99,13 +114,13 @@ function createDropdown() {
     return rating;
 }
 
-
-
 document.getElementById("clearTasksBtn").addEventListener("click", function() {
     localStorage.removeItem("tasks");
     document.getElementById("taskList").innerHTML = "";
+    // Reset task count and update local storage
+    taskCount = 0;
+    saveTaskCountToLocalStorage();
 });
-
 
 function handleSubmit(event) {
     event.preventDefault();
@@ -129,4 +144,3 @@ function handleSubmit(event) {
         });
     });
 }
-

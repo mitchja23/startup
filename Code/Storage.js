@@ -33,4 +33,12 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+
+    function updateCompletedTasksCount() {
+        let completedTasksSpan = document.querySelector("#completedTasks span");
+        completedTasksSpan.textContent = taskCount; 
+    }
+
+    
+    updateCompletedTasksCount();
 });

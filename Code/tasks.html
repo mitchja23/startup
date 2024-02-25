@@ -26,7 +26,7 @@
 
           <div id="aboutWrapper">
             <ul class="about">
-              <li><span>0</span>Goals Completed</li>
+              <li id="completedTasks"><span>0</span> Goals Completed</li>
               <li><span>0</span>Trophies Earned</li>
               <li><span>0</span>Friends</li>
               <li><span id="coins"></span>Coins</li>
@@ -81,6 +81,15 @@
 
   <script src="taskedChecklist.js"></script>
   <script src="Storage.js"></script>
+  <script>
+    function updateCompletedTasksCount() {
+        let completedTasksSpan = document.querySelector("#completedTasks span");
+        completedTasksSpan.textContent = taskCount;
+    }
+    
+
+    updateCompletedTasksCount();
+    </script>
     
 
 </html>
