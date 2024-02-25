@@ -38,6 +38,7 @@
 
 
           <div id="aboutWrapper">
+            <h2 style="text-align: center;">Hey <span class="user-name"></span>!</h2>
             <ul class="about">
               <li><span>0</span>Goals Completed</li>
               <li><span>0</span>Trophies Earned</li>
@@ -138,5 +139,13 @@
   </footer>
   <script src="Storage.js"></script>
   </body>
+  <script>
+    function getUserName() {
+        return localStorage.getItem('userName');
+    }
+
+    const playerNameEl = document.querySelector('.user-name');
+    playerNameEl.textContent = getUserName();
+</script>
     
 </html>

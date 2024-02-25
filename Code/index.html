@@ -11,12 +11,12 @@
         <div class="login-container">
             <div class="form-container">
                 <h1>Login</h1>
-                <form action="home.html" method="post"> 
-                    <input type="text" name="username" placeholder="USERNAME" required/>
+                <div>
+                    <input type="text" id="name" name="username" placeholder="USERNAME" required/>
                     <input type="password" name="password" placeholder="PASSWORD" required/>
-                    <input type="submit" id="submit" value="Login">
-
-                </form>
+                    <button id="submit" onclick="login()">Login</button>
+                    
+                </div>                
                 <div class="register-forget">
                     <a href="Register.html">REGISTER</a>
                 </div>
@@ -30,4 +30,11 @@
     <br />
     <a href="https://github.com/mitchja23/startup">GitHub</a>
 </footer>
+<script>
+    function login() {
+    const nameEl = document.querySelector("#name");
+    localStorage.setItem("userName", nameEl.value);
+    window.location.href = "home.html";
+}
+</script>
 </html>
