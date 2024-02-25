@@ -1,12 +1,11 @@
 let taskCount = parseInt(localStorage.getItem('taskCount')) || 0;
 
-// Function to increment task count and update local storage
+
 function incrementTaskCount() {
     taskCount++;
     saveTaskCountToLocalStorage();
 }
 
-// Function to save task count to local storage
 function saveTaskCountToLocalStorage() {
     localStorage.setItem('taskCount', taskCount);
 }

@@ -5,17 +5,15 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('profilePicture').src = profilePicture;
     }
 
-    const tasks = JSON.parse(localStorage.getItem('tasks')); 
-
-    console.log(tasks); 
+    const tasks = JSON.parse(localStorage.getItem('tasks'));
 
     if (tasks) {
         const taskList = document.getElementById('taskList');
 
         tasks.forEach(function(task) {
-            
+
             const existingTask = Array.from(taskList.querySelectorAll('.task-item label')).find(label => label.textContent === task.content);
-            
+
             if (!existingTask) {
                 const taskItem = document.createElement("div");
                 taskItem.classList.add("task-item");
@@ -36,9 +34,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function updateCompletedTasksCount() {
         let completedTasksSpan = document.querySelector("#completedTasks span");
-        completedTasksSpan.textContent = taskCount; 
+        completedTasksSpan.textContent = taskCount;
     }
 
-    
+    function updateSoldItemCount() {
+        let soldItems = JSON.parse(localStorage.getItem('soldItems')) || [];
+        document.getElementById('PrizeCount').querySelector('span').textContent = soldItems.length;
+    }
+
     updateCompletedTasksCount();
+    updateSoldItemCount(); 
 });
