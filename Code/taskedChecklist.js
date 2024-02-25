@@ -99,24 +99,7 @@ function createDropdown() {
     return rating;
 }
 
-function saveTasksToLocalStorage() {
-    let tasks = [];
-    let taskItems = document.querySelectorAll(".task-item");
 
-    taskItems.forEach(function(taskItem) {
-        let taskContent = taskItem.querySelector("label").textContent;
-        let isChecked = taskItem.querySelector("input[type='checkbox']").checked;
-
-        tasks.push({
-            content: taskContent,
-            isChecked: isChecked
-        });
-    });
-
-    console.log(tasks);
-
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-}
 
 document.getElementById("clearTasksBtn").addEventListener("click", function() {
     localStorage.removeItem("tasks");
@@ -137,10 +120,6 @@ function handleSubmit(event) {
     localStorage.setItem('tasks', JSON.stringify(storedTasks));
 
    
-    saveCoinsToStorage();
-
-    updateTotalCoins();
-
     checkedTasks.forEach(taskText => {
         const taskItems = document.querySelectorAll('.task-item');
         taskItems.forEach(taskItem => {
@@ -151,52 +130,3 @@ function handleSubmit(event) {
     });
 }
 
-
-
-function saveCoinsToStorage() {
-    let coins = 0;
-
-    let taskItems = document.querySelectorAll(".task-item");
-
-    taskItems.forEach(function(taskItem) {
-   
-        let ratingElement = taskItem.querySelector("option");
-        
-
-        if (ratingElement) {
-
-            let rating = ratingElement.value;
-
-
-            switch (rating) {
-                case "Easy":
-                    coins += 1;
-                    break;
-                case "Medium":
-                    coins += 3;
-                    break;
-                case "Hard":
-                    coins += 5;
-                    break;
-                default:
-                    break;
-            }
-
-       
-        }
-    });
-    localStorage.setItem("coins", coins);
-    console.log("Total coins:", coins);
-}
-
-
-function updateTotalCoins() {
-
-    let coins = JSON.parse(localStorage.getItem('coins'));
-
-
-    document.getElementById('coins').textContent = coins;
-}
-
-
-document.getElementById('taskForm').addEventListener('submit', handleSubmit);

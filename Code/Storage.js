@@ -5,13 +5,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('profilePicture').src = profilePicture;
     }
 
-    let coins = JSON.parse(localStorage.getItem('coins')) || 0;
-
-    if (coins){
-        document.getElementById('coins').textContent = coins;
-    }
-
-
     const tasks = JSON.parse(localStorage.getItem('tasks')); 
 
     console.log(tasks); 
