@@ -289,6 +289,8 @@ li {
 }
 
 
+
+
 @media screen and (max-width: 768px) {
   .header__wrapper .cols__container .left__col,
   .header__wrapper .cols__container .right__col {
@@ -310,3 +312,5 @@ li {
 @media screen and (min-width: 1025px) {
 
 }
+
+

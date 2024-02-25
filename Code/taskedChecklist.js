@@ -1,4 +1,3 @@
-// Initialize task count from local storage or default to 0
 let taskCount = parseInt(localStorage.getItem('taskCount')) || 0;
 
 // Function to increment task count and update local storage
@@ -49,7 +48,7 @@ function addNewTask() {
     checkbox.addEventListener("change", function() {
         if (checkbox.checked) {
             openFileExplorer(taskItem);
-            incrementTaskCount(); // Increment task count when task is completed
+            incrementTaskCount(); 
         }
     });
 }
@@ -117,7 +116,6 @@ function createDropdown() {
 document.getElementById("clearTasksBtn").addEventListener("click", function() {
     localStorage.removeItem("tasks");
     document.getElementById("taskList").innerHTML = "";
-    // Reset task count and update local storage
     taskCount = 0;
     saveTaskCountToLocalStorage();
 });
