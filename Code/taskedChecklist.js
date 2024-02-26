@@ -1,4 +1,5 @@
 let taskCount = parseInt(localStorage.getItem('taskCount')) || 0;
+let coinCount = parseInt(localStorage.getItem('coinCount')) ||0;
 
 
 function incrementTaskCount() {
@@ -8,6 +9,16 @@ function incrementTaskCount() {
 
 function saveTaskCountToLocalStorage() {
     localStorage.setItem('taskCount', taskCount);
+}
+
+function incrementCoinCount(){
+    coinCount++;
+    saveCoinCountToLocalStorage();
+}
+
+function saveCoinCountToLocalStorage(){
+    localStorage.setItem('taskCount', coinCount)
+
 }
 
 document.getElementById("newTaskBtn").addEventListener("click", addNewTask);
@@ -47,7 +58,8 @@ function addNewTask() {
     checkbox.addEventListener("change", function() {
         if (checkbox.checked) {
             openFileExplorer(taskItem);
-            incrementTaskCount(); 
+            incrementTaskCount();
+            incrementCoinCount();
         }
     });
 }
@@ -117,6 +129,7 @@ document.getElementById("clearTasksBtn").addEventListener("click", function() {
     document.getElementById("taskList").innerHTML = "";
     taskCount = 0;
     saveTaskCountToLocalStorage();
+    saveCoinCountToLocalStorage();
 });
 
 function handleSubmit(event) {

@@ -37,11 +37,17 @@ document.addEventListener('DOMContentLoaded', function() {
         completedTasksSpan.textContent = taskCount;
     }
 
+    function updateCoinCount() {
+        let completedTasksSpan = document.querySelector("#coinCount span");
+        completedTasksSpan.textContent = coinCount;
+    }
+
     function updateSoldItemCount() {
         let soldItems = JSON.parse(localStorage.getItem('soldItems')) || [];
         document.getElementById('PrizeCount').querySelector('span').textContent = soldItems.length;
     }
 
     updateCompletedTasksCount();
-    updateSoldItemCount(); 
+    updateSoldItemCount();
+    updateCoinCount();
 });
