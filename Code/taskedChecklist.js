@@ -17,9 +17,9 @@ function incrementCoinCount(){
 }
 
 function saveCoinCountToLocalStorage(){
-    localStorage.setItem('taskCount', coinCount)
-
+    localStorage.setItem('coinCount', coinCount);
 }
+
 
 document.getElementById("newTaskBtn").addEventListener("click", addNewTask);
 
