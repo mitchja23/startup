@@ -65,3 +65,27 @@ input[type="button"] {
     justify-content: center;
     border-color: var(--color);
 }
+
+
+.Case-item {
+    width: calc(20% - 20px);
+    padding: 20px;
+    background-color: #9191911f; 
+    border: 5px solid var(--color); 
+    border-radius: 15px;
+    text-align: center;
+    margin: 20px;
+}
+
+.Case-item img {
+    display: block;
+    margin: 0 auto;
+    width: 150px; 
+    height: 150px; 
+}
+
+.Case-item p {
+    margin: 10px 0;
+    font-size: 18px;
+}
+

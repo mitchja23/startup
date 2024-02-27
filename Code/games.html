@@ -1,43 +1,120 @@
+
 <!DOCTYPE html>
-<html land ='en'>
-    <head>
-        <meta charset="utf-8">
-        <title>Games</title>
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <nav>
-        <ul class="menu">
-
-            <li class="dropdown">
-                <a href="#">Navigation</a>
-                <ul class="dropdown-content">
-                    <li><a href="home.html">Home</a></li>
-                    <li><a href="prize.html"> Prizes</a></li>
-                    <li><a href="games.html"> Games</a></li>
-                </ul>
-            </li>
-
-        </ul>
-    </nav>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    
+    <title>Persons Profile</title>
+ 
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="prize.css" />
+    <script src="taskedChecklist.js"></script>
+  </head>
+  <body>
+    <div class="wrapper">
     
 
 
-    <body>
-        <header>
-            <h1 id="CenterAligned">Games</h1>
-            <h1 id="CenterAligned">Coins: "save coins in database"</h1>
-            <hr>
-        </header>
-
-        <h3>Game 1</h3>
-        <h3>Game 2</h3>
-        <h3>Game 3</h3>
+    <div class="header__wrapper">
+      <header></header>
+      <div class="cols__container">
+        <div class="left__col">
+            <div class="img__container">
+                <img id="profilePicture" src="th.jpg" alt="User Image" />
+                <span></span>
+            </div>
 
 
-        <footer>
-            <hr />
-            <span class="text-reset">Jacob Mitchell</span>
-            <br />
-            <a href="https://github.com/mitchja23/startup">GitHub</a>
-          </footer>
-    </body>
+          <div id="aboutWrapper">
+            <ul class="about">
+                <li id="completedTasks"><span>0</span> Goals Completed</li>
+                <li id="PrizeCount"><span>0</span>Trophies Earned</li>
+              <li><span>0</span>Friends</li>
+              <li id="coinCount"><span>0</span>Coins Earned</li>
+            </ul>
+          </div>
+
+          <div class="content">
+
+          </div>
+
+          <div id="Rightcontainer">
+            <div class="container-wrapper">
+                
+            </div>
+        </div>
+        </div>
+        <div id="center">
+          <nav id="navWrapper">
+            <ul >
+              <li id="listItem"><a href="home.html">Profile</a></li>
+              <li id="listItem"><a href="friend.html">Friend Activity</a></li>
+              <li id="listItem"><a href="prize.html">Prizes</a></li>
+              <li id="listItem"><a href="tasks.html">Tasks</a></li>
+            </ul>
+
+          </nav>
+        </div>
+        <div class="right__col">
+            
+        
+          
+
+    <div class="container">
+        <div class="prize-container">
+
+            <table>
+                <tr>
+                    <td class="Case-item" data-item-id="1">
+                        <img src="pictures/basicChest.png" width="150" height="150">
+                        <p>10 coins</p>
+                        <input type="button" value="Open"><br>
+                    </td>
+                    <td class="prize-item" data-item-id="2">
+                        <img src="pictures/Cash2.png" width="100" height="100">
+                        <p>50 coins</p>
+                        <input type="button" value="opem"><br>
+                    </td>
+                    <td class="prize-item" data-item-id="3">
+                        <img src="pictures/CatchingNet.png" width="100" height="100">
+                        <p>100 coins</p>
+                        <input type="button" value="Open"><br>
+                    </td>
+                    <td class="prize-item" data-item-id="4">
+                        <img src="pictures/CatHead.png" width="100" height="100">
+                        <p>250 coins</p>
+                        <input type="button" value="Open"><br>
+                    </td>
+                    <td class="prize-item" data-item-id="5">
+                        <img src="pictures/CD.png" width="100" height="100">
+                        <p>500 coins</p>
+                        <input type="button" value="Open"><br>
+                    </td>
+                </tr>
+
+            </table>
+
+
+
+        </div>
+    </div>
+    </div>
+
+    <footer>
+        <hr />
+        <span class="text-reset">Jacob Mitchell</span>
+        <br />
+        <a href="https://github.com/mitchja23/startup">GitHub</a>
+    </footer>
+
+</body>
+
+<script type="text/javascript" src="sold.js"></script>
+<script src="Storage.js"></script>
+  </body>
+ 
+
+    
+
+
+</html>
