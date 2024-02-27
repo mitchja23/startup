@@ -12,7 +12,7 @@ function saveTaskCountToLocalStorage() {
 }
 
 function incrementCoinCount(){
-    coinCount++;
+    coinCount = Math.floor(Math.random() * 11) + coinCount;
     saveCoinCountToLocalStorage();
 }
 
