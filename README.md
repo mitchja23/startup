@@ -59,14 +59,27 @@ For this deliverable I built out the structure of my application using HTML.
 
 # CSS Deliverable 
 
-* Header footer and main contant has be colored and formated to fit and look nice
+* Header footer and main content has be colored and formated to fit and look nice
 
 * Navigation elements have been moved under profile picture and became buttons
 
-* The Window itself is responise and looks goot on all devices 
+* The Window itself is responsive and looks goot on all devices 
 
-* All the requirmeent html elements have been formatd such has database and websocket areas
+* All the requirement html elements have been formated such has database and websocket areas
 
 * All the text itself has been colored to fit the color scheme
 
 * Boarders were made for all the prize images and profile  picture was centered and rounded
+
+
+
+# JS Deliverable
+
+* The login saves the persons user name and displays  it on the profile on login
+
+* saves coins, tasks, trophies, profile pictures, and user names to the local storage 
+
+* The friend activity tab has a 5 second inteval to make new text bubbles to be able to simulate Web socket
+
+* Allows people to make tasks, get coins and be able to buy the prizes and be able to show those prizes on the profile page. The seach bar works for now only for the mitchja profile is able to seen
+
