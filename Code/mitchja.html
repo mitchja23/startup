@@ -36,18 +36,18 @@
       <div class="cols__container">
         <div class="left__col">
           <div class="img__container">
-            <img id="profilePicture" src="th.jpg" alt="User Image" />
+            <img id="profilePicture" src="pictures/WIN_20240215_15_18_36_Pro.jpg" alt="User Image" />
             <span></span>
         </div>
 
 
           <div id="aboutWrapper">
-            <h2 style="text-align: center;">Hey <span class="user-name"></span>!</h2>
+            <h2 style="text-align: center;">Jacob Mitchell <span class="user-name"></span></h2>
             <ul class="about">
-              <li id="completedTasks"><span>0</span> Goals Completed</li>
-              <li id="PrizeCount"><span>0</span>Trophies Earned</li>
-              <li><span>0</span>Friends</li>
-              <li id="coinCount"><span>0</span>Coins Earned</li>
+              <li><span>∞</span> Goals Completed</li>
+              <li><span>∞</span>Trophies Earned</li>
+              <li><span>∞</span>Friends</li>
+              <li><span>∞</span>Coins Earned</li>
             </ul>
           </div>
 
@@ -141,48 +141,7 @@
       <br />
       <a href="https://github.com/mitchja23/startup">GitHub</a>
   </footer>
-  <script src="Storage.js"></script>
-  <script src="sold.js"></script>
   </body>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const searchButton = document.querySelector('.searchButton');
-        searchButton.addEventListener('click', function() {
-            const searchTerm = document.querySelector('.searchTerm').value.trim().toLowerCase();
-            if (searchTerm === 'mitchja') {
-                window.location.href = 'mitchja.html';
-            }
-        });
-        
-        function getUserName() {
-            return localStorage.getItem('userName');
-        }
-
-        const playerNameEl = document.querySelector('.user-name');
-        playerNameEl.textContent = getUserName();
-
-        function hideAllPrizeItems() {
-            const prizeItems = document.querySelectorAll('.prize-item');
-            prizeItems.forEach(item => {
-                item.style.display = 'none';
-            });
-        }
-
-        hideAllPrizeItems();
-
-        function showSoldItems() {
-            let soldItems = JSON.parse(localStorage.getItem('soldItems')) || [];
-            soldItems.forEach(function(itemId) {
-                let item = document.querySelector('.prize-item[data-item-id="' + itemId + '"]');
-                if (item) {
-                    item.style.display = 'table-cell';
-                }
-            });
-        }
-
-        showSoldItems();
-    });
-</script>
 
 
 
