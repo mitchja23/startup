@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html land ='en'>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <title>Login</title>
@@ -11,12 +11,16 @@
         <div class="login-container">
             <div class="form-container">
                 <h1>Login</h1>
-                <div>
-                    <input type="text" id="name" class="input" name="username" placeholder="USERNAME" required/>
-                    <input type="password" class="input" name="password" placeholder="PASSWORD" required/>
-                    <button id="submit" onclick="login()">Login</button>
-                    
-                </div>                
+                <form id="loginForm" action="/login" method="post"> <!-- Form action points to the login endpoint in your backend -->
+                    <div>
+                        <input type="text" id="username" class="input" name="username" placeholder="USERNAME" required/>
+                        <input type="password" id="password" class="input" name="password" placeholder="PASSWORD" required/>
+                    </div>
+                    <div>
+                        <button type="submit">Login</button> <!-- Submit button triggers form submission -->
+                    </div>
+                </form>
+                
                 <div class="register-forget">
                     <a href="Register.html">REGISTER</a>
                 </div>
@@ -30,11 +34,4 @@
     <br />
     <a href="https://github.com/mitchja23/startup">GitHub</a>
 </footer>
-<script>
-    function login() {
-    const nameEl = document.querySelector("#name");
-    localStorage.setItem("userName", nameEl.value);
-    window.location.href = "home.html";
-}
-</script>
 </html>

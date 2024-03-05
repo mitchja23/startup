@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html land ='en'>
+<html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Login</title>
+    <title>Register</title>
     <link rel="stylesheet" href="login.css">
 </head>
 
@@ -10,14 +10,13 @@
     <section class="container">
         <div class="login-container">
             <div class="form-container">
-                <h1>Login</h1>
-                <form action="index.html" method="post"> 
-                    <input type="text" name="username" placeholder="username" required/>
-                    <input type="email" name="email" placeholder="email" required/>
-                    <input type="password" name="password" placeholder="password" required/>
-                    <input type="submit" id="submit" value="Register">
+                <h1>Register</h1>
+                <form id="registerForm" action="/register" method="post">
+                    <input type="text" name="username" placeholder="Username" required/>
+                    <input type="email" name="email" placeholder="Email" required/>
+                    <input type="password" name="password" placeholder="Password" required/>
+                    <input type="submit" value="Register">
                 </form>
-
             </div>
         </div>
     </section>
