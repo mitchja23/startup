@@ -16,16 +16,13 @@ app.get('/', (req, res) => {
 
 
 app.post('/login', (req, res) => {
- 
     const { username, password } = req.body;
-    const user = users.find(user => user.username === username);
-    if (!user || user.password !== password) {
-        return res.status(401).json({ message: "Invalid username or password" });
+    const user = users.find(user => user.username === username && user.password === password);
+    if (!user) {
+        return res.redirect('/register.html');
     }
-
     res.redirect('/home.html');
 });
-
 
 app.post('/register', (req, res) => {
 
