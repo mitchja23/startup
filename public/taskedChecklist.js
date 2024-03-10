@@ -99,6 +99,7 @@ function createLabelIfReady(taskItem) {
     }
 }
 
+
 function createDropdown() {
     let rating = document.createElement("select");
     let none = document.createElement("option");
@@ -153,4 +154,8 @@ function handleSubmit(event) {
             }
         });
     });
+}
+
+function saveTasksToLocalStorage(taskItem){
+    localStorage.setItem('task' , taskItem)
 }
