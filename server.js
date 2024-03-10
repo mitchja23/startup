@@ -7,6 +7,16 @@ app.use(express.static('public'));
 
 let users = [];
 
+
+function generateUserID() {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    let userID = '';
+    for (let i = 0; i < 9; i++) {
+        userID += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return userID;
+}
+
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '/public/index.html'));
 });
@@ -28,7 +38,11 @@ app.post('/register', (req, res) => {
         return res.status(400).json({ message: "Username or email already exists" });
     }
 
+
+    const userID = generateUserID();
+
     const newUser = {
+        id: userID,
         username,
         email,
         password
@@ -37,7 +51,6 @@ app.post('/register', (req, res) => {
     users.push(newUser);
     res.redirect('/');
 });
-
 
 app.get('/data', (req, res) => {
     const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
@@ -52,12 +65,11 @@ app.get('/data', (req, res) => {
         soldItemCount,
         coinCount,
         username,
+        userid
     };
 
     res.json(data);
 });
-
-
 
 const port = 3000;
 app.listen(port, () => {
