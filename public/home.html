@@ -154,11 +154,12 @@
 
         function updateAboutSection(data) {
             document.querySelector('.user-name').textContent = data.username;
-            document.querySelector('.userid').textContent = data.userid; 
+            document.querySelector('.userid').textContent = data.userid;
             document.querySelector('#completedTasks span').textContent = data.taskCount;
             document.querySelector('#PrizeCount span').textContent = data.soldItemCount;
             document.querySelector('#coinCount span').textContent = data.coinCount;
-        }
+}   
+
 
         function fetchDataAndUpdateAboutSection() {
             fetch('/data')
