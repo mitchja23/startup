@@ -7,23 +7,6 @@ app.use(express.static('public'));
 
 let users = [];
 
-app.get('/data', (req, res) => {
-    const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-    const soldItems = JSON.parse(localStorage.getItem('soldItems')) || [];
-    const coinCount = parseInt(localStorage.getItem('coinCount')) || 0;
-
-    const taskCount = tasks.length;
-    const soldItemCount = soldItems.length;
-
-    const data = {
-        taskCount,
-        soldItemCount,
-        coinCount
-    };
-
-    res.json(data);
-});
-
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '/public/index.html'));
 });
@@ -54,6 +37,27 @@ app.post('/register', (req, res) => {
     users.push(newUser);
     res.redirect('/');
 });
+
+
+app.get('/data', (req, res) => {
+    const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    const soldItems = JSON.parse(localStorage.getItem('soldItems')) || [];
+    const coinCount = parseInt(localStorage.getItem('coinCount')) || 0;
+
+    const taskCount = tasks.length;
+    const soldItemCount = soldItems.length;
+
+    const data = {
+        taskCount,
+        soldItemCount,
+        coinCount,
+        username,
+    };
+
+    res.json(data);
+});
+
+
 
 const port = 3000;
 app.listen(port, () => {
