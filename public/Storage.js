@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const taskList = document.getElementById('taskList');
 
         tasks.forEach(function(task) {
-
             const existingTask = Array.from(taskList.querySelectorAll('.task-item label')).find(label => label.textContent === task.content);
 
             if (!existingTask) {
@@ -47,7 +46,41 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('PrizeCount').querySelector('span').textContent = soldItems.length;
     }
 
-    updateCompletedTasksCount();
-    updateSoldItemCount();
-    updateCoinCount();
+    function updateDataAndSendToServer() {
+        updateCompletedTasksCount();
+        updateSoldItemCount();
+        updateCoinCount();
+    
+        const taskCount = JSON.parse(localStorage.getItem('taskCount')) || [];
+        const coinCount = JSON.parse(localStorage.getItem('coinCount')) || [];
+        const soldItems = JSON.parse(localStorage.getItem('soldItems')) || [];
+
+        const data = {
+            taskCount: taskCount,
+            coinCount: coinCount,
+            soldItems: soldItems
+        };
+    
+        fetch('/data', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Data sent successfully:', data);
+        })
+        .catch(error => {
+            console.error('Error sending data:', error);
+        });
+    }
+
+    updateDataAndSendToServer();
 });
