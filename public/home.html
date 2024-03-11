@@ -47,6 +47,7 @@
           <div id="aboutWrapper">
             <h2 style="text-align: center;">Hey <span class="user-name"></span>!</h2>
             <h5 style="text-align: center;">User Id: <span class="userid"></span></h5>
+            <h4 style="text-align: center;"><span class="quote"></span></h4>
 
 
             <ul class="about">
@@ -210,6 +211,26 @@
 });
 
 </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+        fetch("https://type.fit/api/quotes")
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(data) {
+
+                const randomIndex = Math.floor(Math.random() * data.length);
+                const quote = data[randomIndex].text;
+                
+                document.querySelector('.quote').textContent = quote;
+            })
+            .catch(function(error) {
+                console.error('Error fetching quote:', error);
+            });
+    });
+</script>
+
 
 
 
