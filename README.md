@@ -83,3 +83,14 @@ For this deliverable I built out the structure of my application using HTML.
 
 * Allows people to make tasks, get coins and be able to buy the prizes and be able to show those prizes on the profile page. The seach bar works for now only for the mitchja profile is able to seen
 
+# Service Deliverable
+
+* The backend automatically serves up the front end using express middleware
+
+* I called a third party quote website to give motivational quotes to the user
+
+* I created the backend endpoints for all the data that will get pushed to the database
+
+* Local storage has been linked up with the node.js so any local storage items will get pushed to the node.js and later saved to database
+
+* The HTTP service calls the backennd to send over the data that changed the total counts.
