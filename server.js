@@ -59,22 +59,26 @@ app.post('/login', (req, res) => {
     res.redirect('/home.html');
 });
 
-
 app.post('/data', (req, res) => {
   try {
       const { taskCount, coinCount, soldItems } = req.body;
 
-    
+      const user = users.find(user => user.id === req.query.userid);
+      const username = user ? user.username : '';
+      const userid = user ? user.id : '';
+
       localStorage.setItem('taskCount', taskCount);
       localStorage.setItem('coinCount', coinCount);
       localStorage.setItem('soldItems', JSON.stringify(soldItems));
 
-      res.json({ message: "Data updated successfully" });
+
+      res.json({ taskCount, coinCount, soldItems, username, userid });
   } catch (error) {
       console.error("Error occurred while updating data:", error);
       res.status(500).json({ message: "Internal Server Error" });
   }
 });
+
 const upload = multer({
     storage: multer.diskStorage({
       destination: 'uploads/',

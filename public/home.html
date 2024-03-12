@@ -190,27 +190,7 @@
         showSoldItems();
     });
 </script>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-    fetch('/data')
-        .then(response => response.json())
-        .then(data => {
-            updateAboutSection(data);
-        })
-        .catch(error => {
-            console.error('Error fetching data:', error);
-        });
 
-    function updateAboutSection(data) {
-        document.querySelector('.user-name').textContent = data.username;
-        document.querySelector('.userid').textContent = data.userid;
-        document.querySelector('#completedTasks span').textContent = data.taskCount;
-        document.querySelector('#PrizeCount span').textContent = data.soldItemCount;
-        document.querySelector('#coinCount span').textContent = data.coinCount;
-    }
-});
-
-</script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
 
