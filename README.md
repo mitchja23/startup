@@ -94,3 +94,5 @@ For this deliverable I built out the structure of my application using HTML.
 * Local storage has been linked up with the node.js so any local storage items will get pushed to the node.js and later saved to database
 
 * The HTTP service calls the backennd to send over the data that changed the total counts.
+
+* Note - task now save to local storage but lose functionality when returning to the tasks.html, This will be completely overhauled when mongoDB is added, to test the coin count changing, simply stay on the task page and submit the tasks over and over to simulate coins.  
