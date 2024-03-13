@@ -3,7 +3,37 @@ const { LocalStorage } = require('node-localstorage');
 const app = express();
 const path = require('path');
 const multer = require('multer');
-const {MongoClient} = require('mongodb');
+
+const { MongoClient } = require('mongodb');
+
+const userName = 'jacobemitchell14';
+const password = 'gatajuju30';
+const hostname = 'cs260.lbnmz7r.mongodb.net';
+
+const url = `mongodb+srv://${userName}:${password}@${hostname}`;
+
+const client = new MongoClient(url);
+const db = client.db('startup');
+
+client
+ .connect()
+ .then(() => db.command({ ping: 1 }))
+ .then(() => console.log(`Connected`))
+ .catch((ex) => {
+   console.log(`Error with ${url} because ${ex.message}`);
+   process.exit(1);
+ });
+
+ const scoreCollection = db.collection('score');
+
+scoreCollection.insertOne({ name: 'tim', score: 42 });
+
+scores = [
+ { name: 'ryan', score: 3 },
+ { name: 'holowaychuk', score: 83 },
+];
+scoreCollection.insertMany(scores)
+
 
 app.use(express.json());
 app.use(express.static('public'));
@@ -12,6 +42,7 @@ app.use(express.static('public'));
 const localStorage = new LocalStorage('./localStorage');
 
 let users = [];
+
 
 
 
