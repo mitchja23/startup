@@ -3,6 +3,7 @@ const { LocalStorage } = require('node-localstorage');
 const app = express();
 const path = require('path');
 const multer = require('multer');
+const {MongoClient} = require('mongodb');
 
 app.use(express.json());
 app.use(express.static('public'));
@@ -11,6 +12,9 @@ app.use(express.static('public'));
 const localStorage = new LocalStorage('./localStorage');
 
 let users = [];
+
+
+
 
 function generateUserID() {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
@@ -114,6 +118,10 @@ const upload = multer({
       res.status(500).send({ message: err.message });
     }
   });
+
+
+
+
 
 
 
