@@ -6,11 +6,8 @@ const multer = require('multer');
 
 const { MongoClient } = require('mongodb');
 
-const userName = 'jacobemitchell14';
-const password = 'gatajuju30';
-const hostname = 'cs260.lbnmz7r.mongodb.net';
-
-const url = `mongodb+srv://${userName}:${password}@${hostname}`;
+const cfg = require('./dbConfig.json');
+const url = `mongodb+srv://${cfg.userName}:${cfg.password}@${cfg.hostname}`;
 
 const client = new MongoClient(url);
 const db = client.db('startup');
@@ -24,15 +21,6 @@ client
    process.exit(1);
  });
 
- const scoreCollection = db.collection('score');
-
-scoreCollection.insertOne({ name: 'tim', score: 42 });
-
-scores = [
- { name: 'ryan', score: 3 },
- { name: 'holowaychuk', score: 83 },
-];
-scoreCollection.insertMany(scores)
 
 
 app.use(express.json());
