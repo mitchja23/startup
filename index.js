@@ -30,31 +30,40 @@ app.use(express.json());
 app.use(express.static('public'));
 app.use(cookieParser());
 
-app.post('/auth/create', async (req, res) => {
-  if (await DB.getUser(req.body.email)) {
-    res.status(409).send({ msg: 'Existing user' });
-  } else {
-    password = await bcrypt.hash(req.body.password, 10);
-	const token = uuid.v4()
-    const user = await DB.createUser(req.body.email, token, password);
+app.post('/register', async (req, res) => {
+  const { username, email, password } = req.body;
 
-    setAuthCookie(res, token);
-
-    res.send({id: user._id});
+  const existingUser = await db.collection('users').findOne({ $or: [{ username }, { email }] });
+  if (existingUser) {
+    return res.status(400).json({ message: "Username or email already exists" });
   }
+
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  const newUser = {
+    username,
+    email,
+    password: hashedPassword
+  };
+  const result = await db.collection('users').insertOne(newUser);
+
+  res.redirect('/');
 });
 
-app.post('/auth/login', async (req, res) => {
-  const user = await DB.getUser(req.body.email);
-  if (user) {
-    if (await bcrypt.compare(req.body.password, user.password)) {
-      setAuthCookie(res, user.token);
-      res.send({ id: user._id });
-      return;
-    }
+app.post('/login', async (req, res) => {
+  const { email, password } = req.body;
+
+  const user = await db.collection('users').findOne({ email });
+  if (!user) {
+    return res.status(401).redirect('/register.html'); 
   }
-  res.status(401).send({ msg: 'Unauthorized' });
- });
+
+  const passwordMatch = await bcrypt.compare(password, user.password);
+  if (!passwordMatch) {
+    return res.status(401).redirect('/register.html'); 
+  }
+  res.redirect('/home.html');
+});
  
 
 
@@ -98,38 +107,6 @@ app.get('/', (req, res) => {
 });
 
 
-app.post('/register', (req, res) => {
-    const { username, email, password } = req.body;
-
-    const existingUser = users.find(user => user.username === username || user.email === email);
-    if (existingUser) {
-        return res.status(400).json({ message: "Username or email already exists" });
-    }
-
-    const userID = generateUserID();
-
-    const newUser = {
-        id: userID,
-        username,
-        email,
-        password
-    };
-
-    users.push(newUser);
-    res.redirect('/');
-    console.log(userID)
-    console.log(username)
-});
-
-
-app.post('/login', (req, res) => {
-    const { username, password } = req.body;
-    const user = users.find(user => user.username === username && user.password === password);
-    if (!user) {
-        return res.redirect('/register.html');
-    }
-    res.redirect('/home.html');
-});
 
 app.post('/data', (req, res) => {
   try {
