@@ -3,6 +3,9 @@ const { LocalStorage } = require('node-localstorage');
 const app = express();
 const path = require('path');
 const multer = require('multer');
+const cookieParser = require('cookie-parser');
+const uuid = require('uuid');
+const bcrypt = require('bcrypt');
 
 const { MongoClient } = require('mongodb');
 
@@ -25,7 +28,53 @@ client
 
 app.use(express.json());
 app.use(express.static('public'));
+app.use(cookieParser());
 
+app.post('/auth/create', async (req, res) => {
+  if (await DB.getUser(req.body.email)) {
+    res.status(409).send({ msg: 'Existing user' });
+  } else {
+    password = await bcrypt.hash(req.body.password, 10);
+	const token = uuid.v4()
+    const user = await DB.createUser(req.body.email, token, password);
+
+    setAuthCookie(res, token);
+
+    res.send({id: user._id});
+  }
+});
+
+app.post('/auth/login', async (req, res) => {
+  const user = await DB.getUser(req.body.email);
+  if (user) {
+    if (await bcrypt.compare(req.body.password, user.password)) {
+      setAuthCookie(res, user.token);
+      res.send({ id: user._id });
+      return;
+    }
+  }
+  res.status(401).send({ msg: 'Unauthorized' });
+ });
+ 
+
+
+
+app.get('/cookie', (req, res) => {
+  const token = uuid.v4();
+  res.cookie('token', token, {
+    secure: true,
+    httpOnly: true,
+    sameSite: 'strict',
+  });
+ 
+  res.send({ token: token });
+ });
+ 
+ app.get('*', (req, res) => {
+  const token = req?.cookies.token;
+  res.send({ token: token });
+ });
+ 
 
 const localStorage = new LocalStorage('./localStorage');
 
