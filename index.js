@@ -75,6 +75,14 @@ app.post('/login', async (req, res) => {
       return res.status(401).redirect('/index.html'); 
     }
 
+  
+    const token = uuid.v4();
+    res.cookie('token', token, {
+      secure: true,
+      httpOnly: true,
+      sameSite: 'strict',
+    });
+
     res.redirect('/home.html');
   } catch (error) {
     console.error("Error occurred while logging in:", error);
@@ -83,18 +91,12 @@ app.post('/login', async (req, res) => {
 });
 
 app.get('/cookie', (req, res) => {
-  const token = uuid.v4();
-  res.cookie('token', token, {
-    secure: true,
-    httpOnly: true,
-    sameSite: 'strict',
-  });
- 
+  const token = req.cookies.token;
   res.send({ token: token });
 });
 
 app.get('*', (req, res) => {
-  const token = req?.cookies.token;
+  const token = req.cookies.token;
   res.send({ token: token });
 });
 
@@ -113,20 +115,21 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '/public/index.html'));
 });
 
-app.post('/data', async (req, res) => {
+
+app.post('/data', validateToken, async (req, res) => {
   try {
     const { taskCount, coinCount, soldItems } = req.body;
     const userId = req.query.userid;
 
+    
+    const tokenUserId = req.cookies.tokenUserId;
+    if (userId !== tokenUserId) {
+      return res.status(403).json({ message: "Unauthorized access" });
+    }
+
     const user = await db.collection('UserData').findOne({ _id: userId });
     if (!user) {
       return res.status(404).json({ message: "User not found" });
-    }
-
-    
-    const authenticatedUserId = req.user.id;
-    if (authenticatedUserId !== userId) {
-      return res.status(403).json({ message: "Unauthorized access" });
     }
 
     await db.collection('UserData').updateOne(
@@ -140,6 +143,19 @@ app.post('/data', async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 });
+
+function validateToken(req, res, next) {
+  const token = req.cookies.token;
+  const tokenUserId = req.cookies.tokenUserId;
+
+  if (!token || !tokenUserId) {
+    return res.status(401).redirect('/index.html');
+  }
+
+
+
+  next();
+}
 
 const upload = multer({
   storage: multer.diskStorage({
