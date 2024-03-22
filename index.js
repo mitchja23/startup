@@ -19,7 +19,7 @@ client
   .then(() => db.command({ ping: 1 }))
   .then(() => console.log(`Connected to MongoDB Atlas`))
   .catch((ex) => {
-    console.log(`Error with ${url} because ${ex.message}`);
+    console.log(`Error connecting to ${url} because ${ex.message}`);
     process.exit(1);
   });
 
@@ -28,20 +28,23 @@ app.use(express.static('public'));
 app.use(cookieParser());
 
 app.use(express.urlencoded({ extended: true }));
+
 app.post('/register', async (req, res) => {
   try {
     console.log("Request Body:", req.body); 
 
     const { username, email, password } = req.body;
 
-    if (!username || !email) {
-      return res.status(400).json({ message: "Username and email are required" });
+    if (!username || !email || !password) {
+      return res.status(400).json({ message: "Username, email, and password are required" });
     }
 
-    let hashedPassword;
-    if (password) {
-      hashedPassword = await bcrypt.hash(password, 10);
+    const existingUser = await db.collection('UserData').findOne({ $or: [{ email }, { username }] });
+    if (existingUser) {
+      return res.status(400).json({ message: "User already exists" });
     }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     const userId = generateUserID();
 
@@ -52,7 +55,6 @@ app.post('/register', async (req, res) => {
       userId 
     };
 
-
     await db.collection('UserData').insertOne(newUser);
 
     res.redirect('/index.html');
@@ -62,21 +64,14 @@ app.post('/register', async (req, res) => {
   }
 });
 
-
-
-
-
 app.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
 
     const user = await db.collection('UserData').findOne({ email });
-    if (!user) {
-      return res.status(401).redirect('/index.html'); 
-    }
+    const passwordMatch = user ? await bcrypt.compare(password, user.password) : false;
 
-    const passwordMatch = await bcrypt.compare(password, user.password);
-    if (!passwordMatch) {
+    if (!user || !passwordMatch) {
       return res.status(401).redirect('/index.html'); 
     }
 
@@ -105,8 +100,6 @@ app.get('*', (req, res) => {
 
 const localStorage = new LocalStorage('./localStorage');
 
-let users = [];
-
 function generateUserID() {
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
   let userID = '';
@@ -120,24 +113,26 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '/public/index.html'));
 });
 
-
 app.post('/data', async (req, res) => {
   try {
     const { taskCount, coinCount, soldItems } = req.body;
     const userId = req.query.userid;
 
-  
     const user = await db.collection('UserData').findOne({ _id: userId });
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
 
+    
+    const authenticatedUserId = req.user.id;
+    if (authenticatedUserId !== userId) {
+      return res.status(403).json({ message: "Unauthorized access" });
+    }
 
     await db.collection('UserData').updateOne(
       { _id: userId },
       { $set: { taskCount, coinCount, soldItems } }
     );
-
 
     res.json({ taskCount, coinCount, soldItems, username: user.username, userid: user._id });
   } catch (error) {
@@ -160,14 +155,24 @@ const upload = multer({
 });
 
 app.post('/upload', upload.single('file'), (req, res) => {
-  if (req.file) {
-    res.send({
-      message: 'Uploaded succeeded',
-      file: req.file.filename,
-    });
-  } else {
-    res.status(400).send({ message: 'Upload failed' });
+  if (!req.file) {
+    return res.status(400).send({ message: 'Upload failed' });
   }
+
+  const allowedFileTypes = ['image/jpeg', 'image/png'];
+  if (!allowedFileTypes.includes(req.file.mimetype)) {
+    return res.status(400).send({ message: 'Invalid file type' });
+  }
+
+  const maxFileSize = 1024 * 1024 * 2; 
+  if (req.file.size > maxFileSize) {
+    return res.status(400).send({ message: 'File size too large' });
+  }
+
+  res.send({
+    message: 'Uploaded succeeded',
+    file: req.file.filename,
+  });
 });
 
 app.get('/file/:filename', (req, res) => {
@@ -176,10 +181,10 @@ app.get('/file/:filename', (req, res) => {
 
 app.use((err, req, res, next) => {
   if (err instanceof multer.MulterError) {
-    res.status(413).send({ message: err.message });
-  } else {
-    res.status(500).send({ message: err.message });
+    return res.status(400).send({ message: 'File upload error: ' + err.message });
   }
+  console.error("Internal server error:", err);
+  res.status(500).send({ message: "Internal Server Error" });
 });
 
 const port = 4000;
