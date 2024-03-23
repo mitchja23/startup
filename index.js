@@ -52,7 +52,7 @@ app.post('/register', async (req, res) => {
       username,
       email,
       password: hashedPassword, 
-      userId 
+      userId,
     };
 
     await db.collection('UserData').insertOne(newUser);
@@ -121,13 +121,9 @@ app.post('/data', validateToken, async (req, res) => {
     const { taskCount, coinCount, soldItems } = req.body;
     const userId = req.query.userid;
 
-    
-    const tokenUserId = req.cookies.tokenUserId;
-    if (userId !== tokenUserId) {
-      return res.status(403).json({ message: "Unauthorized access" });
-    }
-
+ 
     const user = await db.collection('UserData').findOne({ _id: userId });
+
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
@@ -143,6 +139,7 @@ app.post('/data', validateToken, async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 });
+
 
 function validateToken(req, res, next) {
   const token = req.cookies.token;

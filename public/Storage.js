@@ -1,12 +1,10 @@
 document.addEventListener('DOMContentLoaded', function() {
     const profilePicture = localStorage.getItem('profilePicture');
-
     if (profilePicture) {
         document.getElementById('profilePicture').src = profilePicture;
     }
 
     const tasks = JSON.parse(localStorage.getItem('tasks'));
-
     if (tasks) {
         const taskList = document.getElementById('taskList');
 
@@ -33,12 +31,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function updateCompletedTasksCount() {
         let completedTasksSpan = document.querySelector("#completedTasks span");
-        completedTasksSpan.textContent = taskCount;
+        completedTasksSpan.textContent = localStorage.getItem('taskCount') || 0;
     }
 
     function updateCoinCount() {
-        let completedTasksSpan = document.querySelector("#coinCount span");
-        completedTasksSpan.textContent = coinCount;
+        let coinCountSpan = document.querySelector("#coinCount span");
+        coinCountSpan.textContent = localStorage.getItem('coinCount') || 0;
     }
 
     function updateSoldItemCount() {
@@ -48,11 +46,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function updateDataAndSendToServer() {
         updateCompletedTasksCount();
-        updateSoldItemCount();
         updateCoinCount();
-    
-        const taskCount = JSON.parse(localStorage.getItem('taskCount')) || [];
-        const coinCount = JSON.parse(localStorage.getItem('coinCount')) || [];
+        updateSoldItemCount();
+
+        const taskCount = localStorage.getItem('taskCount') || 0;
+        const coinCount = localStorage.getItem('coinCount') || 0;
         const soldItems = JSON.parse(localStorage.getItem('soldItems')) || [];
 
         const data = {
@@ -60,8 +58,8 @@ document.addEventListener('DOMContentLoaded', function() {
             coinCount: coinCount,
             soldItems: soldItems
         };
-    
-        fetch('/data', {
+
+        fetch('/data?userid=USER_ID', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
