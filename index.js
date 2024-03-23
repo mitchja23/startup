@@ -53,6 +53,10 @@ app.post('/register', async (req, res) => {
       email,
       password: hashedPassword, 
       userId,
+      taskCount: 0,
+      coinCount: 0,
+      soldItems: 0
+      
     };
 
     await db.collection('UserData').insertOne(newUser);
