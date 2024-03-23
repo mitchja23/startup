@@ -46,13 +46,10 @@ app.post('/register', async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const userId = generateUserID();
-
     const newUser = {
       username,
       email,
       password: hashedPassword, 
-      userId,
       taskCount: 0,
       coinCount: 0,
       soldItems: 0
@@ -104,16 +101,7 @@ app.get('*', (req, res) => {
   res.send({ token: token });
 });
 
-const localStorage = new LocalStorage('./localStorage');
 
-function generateUserID() {
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-  let userID = '';
-  for (let i = 0; i < 9; i++) {
-    userID += characters.charAt(Math.floor(Math.random() * characters.length));
-  }
-  return userID;
-}
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '/public/index.html'));
