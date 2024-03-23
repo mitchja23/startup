@@ -133,6 +133,8 @@ app.post('/data', async (req, res) => {
 
 
 
+
+
 function validateToken(req, res, next) {
   const token = req.cookies.token;
   const tokenUserId = req.cookies.tokenUserId;
