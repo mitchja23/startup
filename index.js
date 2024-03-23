@@ -125,7 +125,6 @@ app.post('/data', validateToken, async (req, res) => {
     const { taskCount, coinCount, soldItems } = req.body;
     const userId = req.query.userid;
 
- 
     const user = await db.collection('UserData').findOne({ _id: userId });
 
     if (!user) {
@@ -143,6 +142,7 @@ app.post('/data', validateToken, async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 });
+
 
 
 function validateToken(req, res, next) {
