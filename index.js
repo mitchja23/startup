@@ -108,7 +108,7 @@ app.get('/', (req, res) => {
 });
 
 
-app.post('/data', validateToken, async (req, res) => {
+app.post('/data', async (req, res) => {
   try {
     const { taskCount, coinCount, soldItems } = req.body;
     const userId = req.query.userid;
@@ -140,9 +140,6 @@ function validateToken(req, res, next) {
   if (!token || !tokenUserId) {
     return res.status(401).redirect('/index.html');
   }
-
-
-
   next();
 }
 

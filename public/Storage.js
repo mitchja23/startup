@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
             soldItems: soldItems
         };
 
-        fetch('/data?userid=USER_ID', {
+        fetch('/data', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
