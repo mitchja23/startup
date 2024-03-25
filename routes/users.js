@@ -204,5 +204,45 @@ router.get("/:id/tasks", async (req, res) => {
   }
 });
 
+router.put("/:id/markAsSold", async (req, res) => {
+  try {
+    const itemId = req.params.id;
+
+    const item = await Item.findById(itemId);
+    if (!item) {
+      return res.status(404).json({ error: "Item not found" });
+    }
+
+    item.count += 1;
+
+    item.sold = true;
+
+
+    await item.save();
+
+    res.status(200).json({ message: "Item marked as sold successfully", updatedItem: item });
+  } catch (error) {
+    console.error("Error marking item as sold:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+  router.get("/:id/coins", async (req, res) => {
+    try {
+        const userId = req.params.id;
+
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ error: "User not found" });
+        }
+
+        // Return the user's coin count
+        res.status(200).json({ coinCount: user.Coins});
+    } catch (error) {
+        console.error("Error fetching user's coin count:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+});
+
+
 
 module.exports = router;
