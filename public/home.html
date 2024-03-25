@@ -8,7 +8,7 @@
     <title>Persons Profile</title>
  
 
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="/public/style.css" />
 
     
   </head>
@@ -51,7 +51,7 @@
             <ul class="about">
               <li id="completedTasks"><span>0</span> Goals Completed</li>
               <li id="PrizeCount"><span>0</span>Trophies Earned</li>
-              <li><span>0</span>Friends</li>
+              <li id="friendCount"><span>0</span>Friends</li>
               <li id="coinCount"><span>0</span>Coins Earned</li>
             </ul>
           </div>
@@ -69,10 +69,10 @@
         <div id="center">
           <nav id="navWrapper">
             <ul >
-              <li id="listItem"><a href="home.html">Profile</a></li>
-              <li id="listItem"><a href="friend.html">Friend Activity</a></li>
-              <li id="listItem"><a href="prize.html">Prizes</a></li>
-              <li id="listItem"><a href="tasks.html">Tasks</a></li>
+                <li id="listItem"><a href="home.html">Profile</a></li>
+                <li id="listItem"><a href="prize.html">Prizes</a></li>
+                <li id="listItem"><a href="friend.html">Friend Activity</a></li>
+                <li id="listItem"><a href="tasks.html">Tasks</a></li>
             </ul>
           </nav>
         </div>
@@ -84,54 +84,54 @@
                 <table>
                     <tr>
                         <td class="prize-item" data-item-id="1">
-                            <img src="pictures/Cash.png" width="100" height="100">
+                            <img src="/public/pictures/Cash.png" width="100" height="100">
                         </td>
                         <td class="prize-item" data-item-id="2">
-                            <img src="pictures/Cash2.png" width="100" height="100">
+                            <img src="/public/pictures/Cash2.png" width="100" height="100">
                         </td>
                         <td class="prize-item" data-item-id="3">
-                            <img src="pictures/CatchingNet.png" width="100" height="100">
+                            <img src="/public/pictures/CatchingNet.png" width="100" height="100">
                         </td>
                         <td class="prize-item" data-item-id="4" >
-                            <img src="pictures/CatHead.png" width="100" height="100">
+                            <img src="/public/pictures/CatHead.png" width="100" height="100">
 
                         </td>
                         <td class="prize-item" data-item-id="5">
-                            <img src="pictures/CD.png" width="100" height="100">
+                            <img src="/public/pictures/CD.png" width="100" height="100">
                         </td>
                     </tr>
                     <tr>
                         <td class="prize-item" data-item-id="6">
-                            <img src="pictures/ChestTreasure.png" width="100" height="100">
+                            <img src="/public/pictures/ChestTreasure.png" width="100" height="100">
                         </td>
                         <td class="prize-item" data-item-id="7">
-                            <img src="pictures/Chili.png" width="100" height="100">
+                            <img src="/public/pictures/Chili.png" width="100" height="100">
                         </td>
                         <td class="prize-item" data-item-id="8">
-                            <img src="pictures/Coin.png" width="100" height="100">
+                            <img src="/public/pictures/Coin.png" width="100" height="100">
                         </td>
                         <td class="prize-item" data-item-id="9">
-                            <img src="pictures/Coin2.png" width="100" height="100">
+                            <img src="/public/pictures/Coin2.png" width="100" height="100">
                         </td>
                         <td class="prize-item" data-item-id="10">
-                            <img src="pictures/Gamepad.png" width="100" height="100">
+                            <img src="/public/pictures/Gamepad.png" width="100" height="100">
                         </td>
                     </tr>
                     <tr>
                         <td class="prize-item" data-item-id="11">
-                            <img src="pictures/Gamepad2.png" width="100" height="100">
+                            <img src="/public/pictures/Gamepad2.png" width="100" height="100">
                         </td>
                         <td class="prize-item" data-item-id="12">
-                            <img src="pictures/Key.png" width="100" height="100">
+                            <img src="/public/pictures/Key.png" width="100" height="100">
                         </td>
                         <td class="prize-item" data-item-id="13">
-                            <img src="pictures/Luggage.png" width="100" height="100">
+                            <img src="/public/pictures/Luggage.png" width="100" height="100">
                         </td>
                         <td class="prize-item" data-item-id="14">
-                            <img src="pictures/Necklace.png" width="100" height="100">
+                            <img src="/public/pictures/Necklace.png" width="100" height="100">
                         </td>
                         <td class="prize-item" data-item-id="15">
-                            <img src="pictures/Trophy.png" width="100" height="100">
+                            <img src="/public/pictures/Trophy.png" width="100" height="100">
                         </td>
                     </tr>
                 </table>
@@ -147,9 +147,11 @@
       <a href="https://github.com/mitchja23/startup">GitHub</a>
   </footer>
   </body>
-  <script src="taskedChecklist.js"></script>
-  <script src="sold.js"></script>
-  <script src="Storage.js"></script>
+  <script src="/public/taskedChecklist.js"></script>
+  <script src="/public/sold.js"></script>
+  <script src="/public/Storage.js"></script>
+  <script src="/public/profile.js"></script>
+  <script src="/public/quoteCall.js"></script>
  
   <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -191,25 +193,7 @@
     });
 </script>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
 
-        fetch("https://type.fit/api/quotes")
-            .then(function(response) {
-                return response.json();
-            })
-            .then(function(data) {
-
-                const randomIndex = Math.floor(Math.random() * data.length);
-                const quote = data[randomIndex].text;
-                
-                document.querySelector('.quote').textContent = quote;
-            })
-            .catch(function(error) {
-                console.error('Error fetching quote:', error);
-            });
-    });
-</script>
 
 
 

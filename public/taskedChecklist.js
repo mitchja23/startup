@@ -1,10 +1,10 @@
 let taskCount = parseInt(localStorage.getItem('taskCount')) || 0;
 let coinCount = parseInt(localStorage.getItem('coinCount')) ||0;
 
-
 function incrementTaskCount() {
     taskCount++;
     saveTaskCountToLocalStorage();
+
 }
 
 function saveTaskCountToLocalStorage() {
@@ -14,6 +14,7 @@ function saveTaskCountToLocalStorage() {
 function incrementCoinCount(){
     coinCount = Math.floor(Math.random() * 11) + coinCount;
     saveCoinCountToLocalStorage();
+
 }
 
 function saveCoinCountToLocalStorage(){
@@ -57,27 +58,10 @@ function addNewTask() {
 
     checkbox.addEventListener("change", function() {
         if (checkbox.checked) {
-            openFileExplorer(taskItem);
             incrementTaskCount();
             incrementCoinCount();
         }
     });
-}
-
-function openFileExplorer(taskItem) {
-    let fileInput = document.createElement("input");
-    fileInput.type = "file";
-    fileInput.accept = "image/*";
-
-    fileInput.addEventListener("change", function() {
-        handleFileSelect(taskItem, fileInput.files[0]);
-    });
-
-    fileInput.click();
-}
-
-function handleFileSelect(taskItem, file) {
-    console.log("Selected file:", file);
 }
 
 function createLabelIfReady(taskItem) {
@@ -159,3 +143,4 @@ function handleSubmit(event) {
 function saveTasksToLocalStorage(taskItem){
     localStorage.setItem('task' , taskItem)
 }
+

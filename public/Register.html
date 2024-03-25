@@ -1,24 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>Register</title>
-    <link rel="stylesheet" href="login.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Registration</title>
+  <link rel="stylesheet" href="login.css">
 </head>
-
 <body>
-    <section class="container">
-        <div class="login-container">
-            <div class="form-container">
-                <h1>Register</h1>
-                <form id="registerForm" action="/register" method="post">
-                    <input type="text" name="username" placeholder="Username" required/>
-                    <input type="email" name="email" placeholder="Email" required/>
-                    <input type="password" name="password" placeholder="Password" required/>
-                    <input type="submit" value="Register">
-                </form>
-            </div>
-        </div>
-    </section>
+  <div class="container">
+    <div class="login-container">
+      <h1>User Registration</h1>
+      <div class="form-container">
+        <form id="registrationForm">
+          <input type="text" id="username" name="username" class="input" placeholder="Username" required minlength="3" maxlength="20">
+          <input type="email" id="email" name="email" class="input" placeholder="Email" required maxlength="50">
+          <input type="password" id="password" name="password" class="input" placeholder="Password" required minlength="1">
+          <button type="submit" id="submit">Register</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <footer>Footer content here</footer>
+  <script src="register.js"></script>
 </body>
 </html>

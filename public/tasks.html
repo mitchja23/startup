@@ -7,8 +7,8 @@
 
     <title>Persons Profile</title>
  
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="tasks.css" />
+    <link rel="stylesheet" href="/public/style.css" />
+    <link rel="stylesheet" href="/public/tasks.css" />
 
   </head>
   <body>
@@ -48,10 +48,10 @@
           <nav id="navWrapper">
             <ul >
               <li id="listItem"><a href="home.html">Profile</a></li>
-              <li id="listItem"><a href="friend.html">Friend Activity</a></li>
               <li id="listItem"><a href="prize.html">Prizes</a></li>
+              <li id="listItem"><a href="friend.html">Friend Activity</a></li>
               <li id="listItem"><a href="tasks.html">Tasks</a></li>
-            </ul>
+          </ul>
           </nav>
         </div>
        
@@ -80,18 +80,11 @@
     </footer>
   </body>
 
-  <script src="taskedChecklist.js"></script>
-  <script src="Storage.js"></script>
+  <script src="/public/taskedChecklist.js"></script>
+  <script src="/public/Storage.js"></script>
+  <script src="/public/sendToBackend.js"></script>
   
-  <script>
-    function updateCompletedTasksCount() {
-        let completedTasksSpan = document.querySelector("#completedTasks span");
-        completedTasksSpan.textContent = taskCount;
-    }
-    
 
-    updateCompletedTasksCount();
-    </script>
     
     
 

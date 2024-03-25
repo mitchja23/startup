@@ -1,10 +1,12 @@
 document.addEventListener('DOMContentLoaded', function() {
     const profilePicture = localStorage.getItem('profilePicture');
+
     if (profilePicture) {
         document.getElementById('profilePicture').src = profilePicture;
     }
 
     const tasks = JSON.parse(localStorage.getItem('tasks'));
+
     if (tasks) {
         const taskList = document.getElementById('taskList');
 
@@ -31,12 +33,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function updateCompletedTasksCount() {
         let completedTasksSpan = document.querySelector("#completedTasks span");
-        completedTasksSpan.textContent = localStorage.getItem('taskCount') || 0;
+        completedTasksSpan.textContent = taskCount;
     }
 
     function updateCoinCount() {
-        let coinCountSpan = document.querySelector("#coinCount span");
-        coinCountSpan.textContent = localStorage.getItem('coinCount') || 0;
+        let completedTasksSpan = document.querySelector("#coinCount span");
+        completedTasksSpan.textContent = coinCount;
     }
 
     function updateSoldItemCount() {
@@ -44,41 +46,4 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('PrizeCount').querySelector('span').textContent = soldItems.length;
     }
 
-    function updateDataAndSendToServer() {
-        updateCompletedTasksCount();
-        updateCoinCount();
-        updateSoldItemCount();
-
-        const taskCount = localStorage.getItem('taskCount') || 0;
-        const coinCount = localStorage.getItem('coinCount') || 0;
-        const soldItems = JSON.parse(localStorage.getItem('soldItems')) || [];
-
-        const data = {
-            taskCount: taskCount,
-            coinCount: coinCount,
-            soldItems: soldItems
-        };
-
-        fetch('/data', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Data sent successfully:', data);
-        })
-        .catch(error => {
-            console.error('Error sending data:', error);
-        });
-    }
-
-    updateDataAndSendToServer();
-});
+})
