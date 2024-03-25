@@ -33,8 +33,8 @@ const UserSchema = new mongoose.Schema(
       default: [],
     },
     Coins: {
-      type: Array,
-      default: [],
+      type: Number,
+      default: 0,
     },
     TaskCount: {
       type: Array,

@@ -110,33 +110,33 @@ router.put("/:id/unfollow", async (req, res) => {
 
   router.get("/:id/data", async (req, res) => {
     try {
-        if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
-            return res.status(400).json({ error: "Invalid user ID" });
-        }
+      if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+        return res.status(400).json({ error: "Invalid user ID" });
+      }
+  
+      const user = await User.findById(req.params.id);
+      if (!user) {
+        return res.status(404).json({ error: "User not found" });
+      }
+  
+      // Convert Coins array to number
+      const totalCoins = Array.isArray(user.Coins) ? user.Coins.reduce((acc, coin) => acc + coin, 0) : user.Coins;
 
-        const user = await User.findById(req.params.id);
-        if (!user) {
-            return res.status(404).json({ error: "User not found" });
-        }
-
-        // Calculate total coins
-        const totalCoins = user.Coins.reduce((acc, coin) => acc + coin, 0);
-
-        res.status(200).json({
-            profilePicture: user.profilePicture,
-            username: user.username,
-            _id: user._id,
-            TaskCount: user.TaskCount,
-            Items: user.Items,
-            followers: user.followers,
-            Coins: user.Coins,
-            totalCoins: totalCoins, // Add total coins to the response
-        });
+  
+      res.status(200).json({
+        profilePicture: user.profilePicture,
+        username: user.username,
+        _id: user._id,
+        TaskCount: user.TaskCount,
+        Items: user.Items,
+        followers: user.followers,
+        Coins: totalCoins, // Send the totalCoins as a number
+      });
     } catch (error) {
-        console.error("Error fetching user data:", error);
-        res.status(500).json({ error: "Internal server error" });
+      console.error("Error fetching user data:", error);
+      res.status(500).json({ error: "Internal server error" });
     }
-});
+  });
 
   
   
@@ -234,7 +234,6 @@ router.put("/:id/markAsSold", async (req, res) => {
             return res.status(404).json({ error: "User not found" });
         }
 
-        // Return the user's coin count
         res.status(200).json({ coinCount: user.Coins});
     } catch (error) {
         console.error("Error fetching user's coin count:", error);
