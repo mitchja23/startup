@@ -1,25 +1,3 @@
-let taskCount = parseInt(localStorage.getItem('taskCount')) || 0;
-let coinCount = parseInt(localStorage.getItem('coinCount')) ||0;
-
-function incrementTaskCount() {
-    taskCount++;
-    saveTaskCountToLocalStorage();
-
-}
-
-function saveTaskCountToLocalStorage() {
-    localStorage.setItem('taskCount', taskCount);
-}
-
-function incrementCoinCount(){
-    coinCount = Math.floor(Math.random() * 11) + coinCount;
-    saveCoinCountToLocalStorage();
-
-}
-
-function saveCoinCountToLocalStorage(){
-    localStorage.setItem('coinCount', coinCount);
-}
 
 
 document.getElementById("newTaskBtn").addEventListener("click", addNewTask);
@@ -62,7 +40,11 @@ function addNewTask() {
             incrementCoinCount();
         }
     });
+
+    // Save the task to the database
+    saveTaskToDatabase(input.value, rating.value);
 }
+
 
 function createLabelIfReady(taskItem) {
     let input = taskItem.querySelector("input[type='text']");
@@ -140,7 +122,28 @@ function handleSubmit(event) {
     });
 }
 
-function saveTasksToLocalStorage(taskItem){
-    localStorage.setItem('task' , taskItem)
-}
 
+async function saveTaskToDatabase(taskContent, taskDifficulty) {
+    try {
+        const userId = extractIdFromUrl(); // Extract userId from the URL
+
+        const response = await fetch(`/api/users/${userId}/saveTask`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                userId: userId,
+                content: taskContent,
+                difficulty: taskDifficulty
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to save task');
+        }
+    } catch (error) {
+        console.error('Error saving task:', error);
+        // Handle error saving task
+    }
+}

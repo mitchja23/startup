@@ -1,39 +1,32 @@
-document.addEventListener('DOMContentLoaded', async function() {
+document.addEventListener("DOMContentLoaded", async () => {
     try {
-        const userId = getUserIdFromUrl();
-        const userData = await fetchUserData(userId);
+        // Fetch user data from the backend API
+        const userId = extractIdFromUrl();
+        const userDataResponse = await fetch(`/api/users/${userId}/data`);
+        if (!userDataResponse.ok) {
+            throw new Error('Failed to fetch user data');
+        }
+        const userData = await userDataResponse.json();
 
-        updateProfile(userData);
+        // Update HTML elements with user data
+        document.getElementById("profilePicture").src = userData.profilePicture;
+        document.querySelector("#completedTasks span").textContent = userData.TaskCount.length;
+        document.querySelector("#PrizeCount span").textContent = userData.Items.length;
+        document.querySelector("#coinCount span").textContent = userData.Coins;
+
+        // You can update other HTML elements with additional user data here
+
     } catch (error) {
-        console.error('Error fetching user data:', error);
+        console.error('Error loading user data:', error);
+        // Handle error loading user data
     }
 });
 
-function getUserIdFromUrl() {
-    const urlParams = new URLSearchParams(window.location.search);
-    console.log(urlParams)
-    return urlParams.get('id');
-}
-
-async function fetchUserData(userId) {
-    try {
-        const response = await fetch(`/api/users/${userData._id}`);
-        if (!response.ok) {
-            throw new Error('Failed to fetch user data');
-        }
-        return await response.json();
-    } catch (error) {
-        throw new Error('Failed to fetch user data: ' + error.message);
+function extractIdFromUrl() {
+    const url = window.location.href;
+    const urlParts = url.split('/');
+    if (urlParts.length >= 4) { 
+        return urlParts[3];
     }
+    return null; 
 }
-
-function updateProfile(userData) {
-    document.querySelector('.user-name').textContent = userData.username;
-    document.querySelector('.userid').textContent = userData._id;
-    document.querySelector('.completedTasks').textContent = userData.TaskCount.length; 
-    document.querySelector('.PrizeCount').textContent = userData.Items.length; 
-    document.querySelector('.friendCount').textContent = userData.followers.length; 
-    document.querySelector('.coinCount').textContent = userData.Coins.length; 
-}
-
-

@@ -44,6 +44,10 @@ const UserSchema = new mongoose.Schema(
       type: Array,
       default: [],
     },
+    Tasks: {
+      type: Array,
+      default: []
+    }
   },
   { timestamps: true }
 );

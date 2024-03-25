@@ -108,31 +108,37 @@ router.put("/:id/unfollow", async (req, res) => {
   const mongoose = require("mongoose");
 
 
-  router.put("/:id/data", async (req, res) => {
+  router.get("/:id/data", async (req, res) => {
     try {
-      if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
-        return res.status(400).json({ error: "Invalid user ID" });
-      }
-  
-      const user = await User.findById(req.params.id);
-      if (!user) {
-        return res.status(404).json({ error: "User not found" });
-      }
-  
-      res.status(200).json({
-        profilePicture: user.profilePicture,
-        username: user.username,
-        _id: user._id,
-        TaskCount: user.TaskCount,
-        Items: user.Items,
-        followers: user.followers,
-        Coins: user.Coins
-      });
+        if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+            return res.status(400).json({ error: "Invalid user ID" });
+        }
+
+        const user = await User.findById(req.params.id);
+        if (!user) {
+            return res.status(404).json({ error: "User not found" });
+        }
+
+        // Calculate total coins
+        const totalCoins = user.Coins.reduce((acc, coin) => acc + coin, 0);
+
+        res.status(200).json({
+            profilePicture: user.profilePicture,
+            username: user.username,
+            _id: user._id,
+            TaskCount: user.TaskCount,
+            Items: user.Items,
+            followers: user.followers,
+            Coins: user.Coins,
+            totalCoins: totalCoins, // Add total coins to the response
+        });
     } catch (error) {
-      console.error("Error fetching user data:", error);
-      res.status(500).json({ error: "Internal server error" });
+        console.error("Error fetching user data:", error);
+        res.status(500).json({ error: "Internal server error" });
     }
-  });
+});
+
+  
   
   router.post("/:id/submitTask", async (req, res) => {
     try {
@@ -153,5 +159,50 @@ router.put("/:id/unfollow", async (req, res) => {
       res.status(500).json({ error: "Internal server error" });
     }
   });
+
+  router.post("/:id/saveTask", async (req, res) => {
+    try {
+        const userId = req.params.id;
+        const { content, difficulty } = req.body;
+
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ error: "User not found" });
+        }
+
+        // Add the task to the user's Tasks array
+        user.Tasks.push({ content, difficulty });
+
+        // Save the updated user
+        await user.save();
+
+        res.status(200).json({
+            message: "Task saved successfully",
+            updatedUser: user
+        });
+    } catch (error) {
+        console.error("Error saving task:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+
+router.get("/:id/tasks", async (req, res) => {
+  try {
+      const userId = req.params.id;
+
+      const user = await User.findById(userId);
+      if (!user) {
+          return res.status(404).json({ error: "User not found" });
+      }
+
+      const tasks = user.Tasks;
+
+      res.status(200).json(tasks);
+  } catch (error) {
+      console.error("Error fetching tasks data:", error);
+      res.status(500).json({ error: "Internal server error" });
+  }
+});
+
 
 module.exports = router;
