@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const Item = require("../models/Items");
 const router = require("express").Router();
 const bcrypt = require("bcrypt");
 
@@ -208,39 +209,47 @@ router.put("/:id/markAsSold", async (req, res) => {
   try {
     const itemId = req.params.id;
 
+    // Find the item by ID
     const item = await Item.findById(itemId);
     if (!item) {
       return res.status(404).json({ error: "Item not found" });
     }
 
+    // Increment the count of the item
     item.count += 1;
 
+    // Mark the item as sold
     item.sold = true;
 
-
+    // Save the updated item
     await item.save();
 
-    res.status(200).json({ message: "Item marked as sold successfully", updatedItem: item });
+    // Fetch the user's data
+    const userId = req.body.userId;
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    // Update the user's coins count
+    user.Coins += item.price;
+
+    // Save the updated user data
+    await user.save();
+
+    res.status(200).json({ message: "Item marked as sold successfully", updatedItem: item, updatedUser: user });
   } catch (error) {
     console.error("Error marking item as sold:", error);
     res.status(500).json({ error: "Internal server error" });
   }
-  router.get("/:id/coins", async (req, res) => {
-    try {
-        const userId = req.params.id;
-
-        const user = await User.findById(userId);
-        if (!user) {
-            return res.status(404).json({ error: "User not found" });
-        }
-
-        res.status(200).json({ coinCount: user.Coins});
-    } catch (error) {
-        console.error("Error fetching user's coin count:", error);
-        res.status(500).json({ error: "Internal server error" });
-    }
 });
-});
+
+
+
+
+
+
+
 
 
 
