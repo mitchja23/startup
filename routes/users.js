@@ -134,12 +134,11 @@ router.put("/:id/unfollow", async (req, res) => {
     }
   });
   
-  router.post("/submitTask", async (req, res) => {
+  router.post("/:id/submitTask", async (req, res) => {
     try {
-      const userId = req.body.userId; 
-      
-
-      const updatedUser = await User.findByIdAndUpdate(userId, { $inc: { TaskCount: 1 } }, { new: true });
+      const userId = req.params.id; 
+  
+      const updatedUser = await User.findByIdAndUpdate(userId, { $push: { TaskCount: 1 } }, { new: true });
       
       const randomCoinCount = Math.floor(Math.random() * 10) + 1;
       updatedUser.Coins += randomCoinCount;
