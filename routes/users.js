@@ -119,7 +119,7 @@ router.put("/:id/unfollow", async (req, res) => {
         return res.status(404).json({ error: "User not found" });
       }
   
-      // Convert Coins array to number
+  
       const totalCoins = Array.isArray(user.Coins) ? user.Coins.reduce((acc, coin) => acc + coin, 0) : user.Coins;
 
   
@@ -130,7 +130,7 @@ router.put("/:id/unfollow", async (req, res) => {
         TaskCount: user.TaskCount,
         Items: user.Items,
         followers: user.followers,
-        Coins: totalCoins, // Send the totalCoins as a number
+        Coins: totalCoins, 
       });
     } catch (error) {
       console.error("Error fetching user data:", error);
@@ -170,10 +170,10 @@ router.put("/:id/unfollow", async (req, res) => {
             return res.status(404).json({ error: "User not found" });
         }
 
-        // Add the task to the user's Tasks array
+      
         user.Tasks.push({ content, difficulty });
 
-        // Save the updated user
+    
         await user.save();
 
         res.status(200).json({

@@ -123,7 +123,7 @@ function handleSubmit(event) {
 
 async function saveTaskToDatabase(taskContent, taskDifficulty) {
     try {
-        const userId = extractIdFromUrl(); // Extract userId from the URL
+        const userId = extractIdFromUrl(); 
 
         const response = await fetch(`/api/users/${userId}/saveTask`, {
             method: 'POST',
@@ -142,6 +142,5 @@ async function saveTaskToDatabase(taskContent, taskDifficulty) {
         }
     } catch (error) {
         console.error('Error saving task:', error);
-        // Handle error saving task
     }
 }

@@ -13,8 +13,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function submitTask() {
       try {
-          const userId = extractIdFromUrl(); // Extract userId from the URL
-          const response = await fetch(`/api/users/${userId}/submitTask`, { // Use the extracted userId in the URL
+          const userId = extractIdFromUrl(); 
+          const response = await fetch(`/api/users/${userId}/submitTask`, { 
               method: 'POST',
               headers: {
                   'Content-Type': 'application/json'

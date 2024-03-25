@@ -11,7 +11,7 @@ router.post("/", async (req, res) => {
     res.status(500).json(err);
   }
 });
-//update a post
+
 
 router.put("/:id", async (req, res) => {
   try {
@@ -26,7 +26,6 @@ router.put("/:id", async (req, res) => {
     res.status(500).json(err);
   }
 });
-//delete a post
 
 router.delete("/:id", async (req, res) => {
   try {
@@ -41,7 +40,7 @@ router.delete("/:id", async (req, res) => {
     res.status(500).json(err);
   }
 });
-//like / dislike a post
+
 
 router.put("/:id/like", async (req, res) => {
   try {
@@ -57,7 +56,7 @@ router.put("/:id/like", async (req, res) => {
     res.status(500).json(err);
   }
 });
-//get a post
+
 
 router.get("/:id", async (req, res) => {
   try {
@@ -68,7 +67,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-//get timeline posts
+
 
 router.get("/timeline/all", async (req, res) => {
   try {
