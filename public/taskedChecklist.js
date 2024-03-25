@@ -1,5 +1,3 @@
-
-
 document.getElementById("newTaskBtn").addEventListener("click", addNewTask);
 
 function addNewTask() {
@@ -40,10 +38,8 @@ function addNewTask() {
             incrementCoinCount();
         }
     });
-
-    // Save the task to the database
-    saveTaskToDatabase(input.value, rating.value);
 }
+
 
 
 function createLabelIfReady(taskItem) {
@@ -61,9 +57,11 @@ function createLabelIfReady(taskItem) {
         taskItem.removeChild(input);
         taskItem.removeChild(rating);
 
-        saveTasksToLocalStorage();
+        // Save the task to the database
+        saveTaskToDatabase(inputValue, selectValue);
     }
 }
+
 
 
 function createDropdown() {
