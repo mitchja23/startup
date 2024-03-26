@@ -51,6 +51,10 @@ app.get('/:userId/tasks.html', (req, res) => {
   res.sendFile(path.join(__dirname, '/public/tasks.html'));
 });
 
+app.get('/:userId/settings.html', (req, res) => {
+  res.sendFile(path.join(__dirname, '/public/settings.html'));
+});
+
 
 const port = 4000;
 app.listen(port, () => {

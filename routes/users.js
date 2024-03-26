@@ -1,7 +1,10 @@
 const User = require("../models/User");
 const Item = require("../models/Items");
+const multer = require('multer');
 const router = require("express").Router();
 const bcrypt = require("bcrypt");
+const path = require('path');
+
 
 
 function authenticate(req, res, next) {
@@ -209,32 +212,32 @@ router.put("/:id/markAsSold", async (req, res) => {
   try {
     const itemId = req.params.id;
 
-    // Find the item by ID
+  
     const item = await Item.findById(itemId);
     if (!item) {
       return res.status(404).json({ error: "Item not found" });
     }
 
-    // Increment the count of the item
+  
     item.count += 1;
 
-    // Mark the item as sold
+   
     item.sold = true;
 
-    // Save the updated item
+
     await item.save();
 
-    // Fetch the user's data
+  
     const userId = req.body.userId;
     const user = await User.findById(userId);
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
 
-    // Update the user's coins count
+   
     user.Coins += item.price;
 
-    // Save the updated user data
+
     await user.save();
 
     res.status(200).json({ message: "Item marked as sold successfully", updatedItem: item, updatedUser: user });
@@ -243,6 +246,39 @@ router.put("/:id/markAsSold", async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
+
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+      cb(null, 'uploads/'); 
+  },
+  filename: function (req, file, cb) {
+      cb(null, Date.now() + path.extname(file.originalname)); 
+  }
+});
+const upload = multer({ storage: storage });
+
+
+router.post('/:id/uploadProfilePicture', upload.single('profilePicture'), async (req, res) => {
+  try {
+      if (req.file) {
+       
+          const profilePictureUrl = '/uploads/' + req.file.filename;
+
+          const userId = req.headers['user-id']; 
+          const user = await User.findByIdAndUpdate(userId, { profilePicture: profilePictureUrl });
+
+        
+          res.status(200).send(profilePictureUrl);
+      } else {
+          res.status(400).send('No file uploaded');
+      }
+  } catch (error) {
+      console.error('Error uploading profile picture:', error);
+      res.status(500).send('Internal Server Error');
+  }
+});
+
 
 
 
