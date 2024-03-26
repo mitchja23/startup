@@ -3,7 +3,7 @@ const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const cookieParser = require("cookie-parser");
 
-// Use cookie-parser middleware
+
 router.use(cookieParser());
 
 router.post("/register", async (req, res) => {
@@ -32,8 +32,7 @@ router.post("/login", async (req, res) => {
     const validPassword = await bcrypt.compare(req.body.password, user.password);
     if (!validPassword) return res.status(400).json("Wrong password");
 
-    // Set cookie upon successful login
-    res.cookie("userId", user._id, { httpOnly: true }); // Example: setting userId as the cookie name
+    res.cookie("userId", user._id, { httpOnly: true }); 
 
     res.status(200).json(user);
   } catch (err) {
