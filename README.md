@@ -96,3 +96,14 @@ For this deliverable I built out the structure of my application using HTML.
 * The HTTP service calls the backennd to send over the data that changed the total counts.
 
 * Note - task now save to local storage but lose functionality when returning to the tasks.html, This will be completely overhauled when mongoDB is added, to test the coin count changing, simply stay on the task page and submit the tasks over and over to simulate coins.  
+
+# Login Deliverable 
+
+* Set up the login and user creation features 
+
+* Saved all infomation to teh database
+
+* Used mongoose to create the users schema to make every page dyanamic 
+
+* Automatically pulls down all user data and populates the page 
+.  
