@@ -7,55 +7,29 @@ document.addEventListener('DOMContentLoaded', async function () {
         button.disabled = true;
     }
 
-    async function purchaseItem(itemId, itemPrice, userId, button) {
-        try {
-            const userDataResponse = await fetch(`/api/users/${userId}/data`);
-            if (!userDataResponse.ok) {
-                throw new Error('Failed to fetch user data');
-            }
-            const userData = await userDataResponse.json();
-            const coinCount = userData.Coins;
-
-            if (coinCount >= itemPrice) {
-                // Call the markAsSold endpoint to mark the item as sold
-                const markSoldResponse = await fetch(`/api/items/${itemId}/markAsSold`, {
-                    method: 'PUT',
+    const buyButtons = document.querySelectorAll('.buy-button');
+    buyButtons.forEach(button => {
+        button.addEventListener('click', async () => {
+            try {
+                const itemId = button.parentElement.getAttribute('data-item-id');
+                const response = await fetch(`/api/items/${itemId}/buy`, {
+                    method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ userId: userId }) // Pass the userId to the endpoint
+                        'Content-Type': 'application/json',
+                        'user-id': 'USER_ID' // Replace USER_ID with the actual user ID
+                    }
                 });
-                if (!markSoldResponse.ok) {
-                    throw new Error('Failed to mark item as sold');
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log(data); // Handle response data accordingly
+                } else {
+                    console.error('Error buying item:', response.statusText);
                 }
-
-                // Mark item as sold in the UI
-                markItemAsSold(button);
-            } else {
-                console.error('Insufficient funds to purchase item');
+            } catch (error) {
+                console.error('Error buying item:', error);
             }
-        } catch (error) {
-            console.error('Error:', error);
-        }
-    }
-
-    let buyButtons = document.querySelectorAll('.prize-item input[type="button"]');
-
-    buyButtons.forEach(function (button) {
-        button.addEventListener('click', async function () {
-            let itemId = button.parentNode.dataset.itemId; // Extract item ID from data-item-id attribute
-            let itemPrice = parseInt(button.parentNode.querySelector('p').textContent);
-
-            const userId = extractIdFromUrl();
-            if (!userId) {
-                console.error('User ID not found in URL');
-                return;
-            }
-
-            await purchaseItem(itemId, itemPrice, userId, button);
         });
     });
-
     // Function to extract user ID from the URL
     function extractIdFromUrl() {
         const url = window.location.href;
