@@ -6,6 +6,17 @@ const cookieParser = require("cookie-parser");
 
 router.use(cookieParser());
 
+
+const generateRandomId = () => {
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let randomId = '';
+  for (let i = 0; i < 7; i++) {
+    randomId += characters.charAt(Math.floor(Math.random() * characters.length));
+  }
+  return randomId;
+};
+
+
 router.post("/register", async (req, res) => {
   try {
     const salt = await bcrypt.genSalt(10);
@@ -15,6 +26,7 @@ router.post("/register", async (req, res) => {
       username: req.body.username,
       email: req.body.email,
       password: hashedPassword,
+      FriendId: generateRandomId
     });
 
     const user = await newUser.save();
@@ -23,6 +35,7 @@ router.post("/register", async (req, res) => {
     res.status(500).json(err)
   }
 });
+
 
 router.post("/login", async (req, res) => {
   try {

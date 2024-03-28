@@ -46,7 +46,11 @@ const UserSchema = new mongoose.Schema(
     },
     Tasks: {
       type: Array,
-      default: []
+      default: [],
+    },
+    FriendId: {
+      type: Number,
+      default: 0
     }
   },
   { timestamps: true }
