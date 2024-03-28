@@ -134,7 +134,8 @@ router.put("/:id/unfollow", async (req, res) => {
         TaskCount: user.TaskCount,
         Items: user.Items,
         followers: user.followers,
-        Coins: totalCoins, 
+        Coins: totalCoins,
+        FriendId: user.FriendId
       });
     } catch (error) {
       console.error("Error fetching user data:", error);

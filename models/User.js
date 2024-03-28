@@ -49,7 +49,7 @@ const UserSchema = new mongoose.Schema(
       default: [],
     },
     FriendId: {
-      type: Number,
+      type: String,
       default: 0
     }
   },

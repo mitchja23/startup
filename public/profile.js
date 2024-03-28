@@ -13,6 +13,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         document.querySelector("#completedTasks span").textContent = userData.TaskCount.length;
         document.querySelector("#PrizeCount span").textContent = userData.Items.length;
         document.querySelector("#coinCount span").textContent = userData.Coins;
+        document.querySelector("#Friendid span").textContent = userData.FriendId;
+
+
 
      
 
