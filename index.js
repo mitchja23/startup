@@ -21,7 +21,7 @@ mongoose.connect(process.env.MONGO_URL)
     console.error("Error connecting to MongoDB:", error);
   });
 
-  app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(express.json());
 app.use(helmet());
